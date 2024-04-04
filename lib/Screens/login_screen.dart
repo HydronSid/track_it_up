@@ -8,6 +8,8 @@ import 'package:nb_utils/nb_utils.dart' as nb;
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
 import 'package:track_it_up/Widgets/input_fields.dart';
 
+import 'home_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -36,14 +38,17 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     Future.delayed(const Duration(seconds: 3), () {
-      LocalPreferences().setUserName(ctlName.text);
-      LocalPreferences().setUserHeight(ctlHeight.text);
-      LocalPreferences().setUserWeight(ctlWeight.text);
+      LocalPreferences().setUserName(ctlName.text.trim());
+      LocalPreferences().setUserHeight(ctlHeight.text.trim());
+      LocalPreferences().setUserWeight(ctlWeight.text.trim());
       LocalPreferences().setLoginBool(true);
 
       setState(() {
         isLoading = false;
       });
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
   }
 
@@ -186,6 +191,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             return;
                                           }
                                           _formKey.currentState!.save();
+                                          FocusScope.of(context)
+                                              .requestFocus(FocusNode());
                                           loginUser();
                                         },
                                   child: isLoading

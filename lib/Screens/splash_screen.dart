@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:track_it_up/Screens/home_screen.dart';
+import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
-
+import 'package:nb_utils/nb_utils.dart' as nb;
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    nb.setStatusBarColor(bgColor);
     getLoginStatus();
     super.initState();
   }
@@ -22,6 +25,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 3), () {
       if (status) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ));
       } else {
         Navigator.push(
             context,
@@ -36,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: bgColor,
       body: Center(
         child: Image.asset(
           "assets/images/app_logo.png",
