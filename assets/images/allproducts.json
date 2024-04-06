@@ -1,0 +1,45 @@
+[
+    {
+        "id":"0",
+        "name":"Rice",
+        "nutrition":"3",
+        "foodtype":"Veg",
+        "calories":"130",
+        "protein":"2.7",
+        "carbohydrate":"28",
+        "image":"rice.jpg"
+    },
+    {
+        "id":"1",
+        "name":"Chana Daal",
+        "nutrition":"3",
+        "foodtype":"Veg",
+        "calories":"130",
+        "protein":"2.7",
+        "carbohydrate":"28",
+        "image":"chana_daal.jpg"
+        
+    },
+    {
+        "id":"2",
+        "name":"Avocado",
+        "nutrition":"3",
+        "foodtype":"Veg",
+        "calories":"130",
+        "protein":"2.7",
+        "carbohydrate":"28",
+        "image":"avocado.jpg"
+        
+    },
+    {
+        "id":"3",
+        "name":"Broccoli",
+        "nutrition":"3",
+        "foodtype":"Veg",
+        "calories":"130",
+        "protein":"2.7",
+        "carbohydrate":"28",
+        "image":"broccoli.jpg"
+        
+    }
+]

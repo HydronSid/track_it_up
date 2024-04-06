@@ -62,57 +62,96 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: Scaffold(
           backgroundColor: bgColor,
           body: SafeArea(
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            child: Form(
+              key: _formKey,
+              child: Column(children: [
+                FadeInUp(
+                  child: Text(
+                    "Welcome to Track it Up",
+                    style: GoogleFonts.nunito(color: textColor, fontSize: 18),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Expanded(
+                  child: SvgPicture.asset(
+                      fit: BoxFit.cover,
+                      width: size.width,
+                      "assets/svg_images/login_image.svg"),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 10),
+                  child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      FadeInUp(
+                        child: Text(
+                          "Sign In",
+                          style: GoogleFonts.nunito(
+                              color: textColor,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      FadeInUp(
+                        child: LoginTextField(
+                          pref: const Icon(
+                            CupertinoIcons.person,
+                            color: textColor,
+                          ),
+                          controllerValue: ctlName,
+                          hintText: 'Enter your name',
+                          inputType: TextInputType.name,
+                          validate: (val) {
+                            if (val!.isEmpty) {
+                              return "Cant be Empty.";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      FadeInUp(
+                        child: Row(
                           children: [
-                            FadeInUp(
-                              child: SvgPicture.asset(
-                                  "assets/svg_images/login_image.svg"),
-                            ),
-                            FadeInUp(
-                              child: Text(
-                                "Sign In",
-                                style: GoogleFonts.nunito(
-                                    color: textColor,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            FadeInUp(
-                              child: Text(
-                                "Welcome to Track it Up",
-                                style: GoogleFonts.nunito(
-                                    color: textColor, fontSize: 16),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 45,
-                            ),
-                            FadeInUp(
+                            Expanded(
                               child: LoginTextField(
                                 pref: const Icon(
-                                  CupertinoIcons.person,
+                                  CupertinoIcons.pin_fill,
                                   color: textColor,
                                 ),
-                                controllerValue: ctlName,
-                                hintText: 'Enter your name',
-                                inputType: TextInputType.name,
+                                suf: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Cm",
+                                      style: GoogleFonts.nunito(
+                                          color: textColor,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                controllerValue: ctlHeight,
+                                hintText: 'Height',
+                                inputType: TextInputType.number,
                                 validate: (val) {
                                   if (val!.isEmpty) {
                                     return "Cant be Empty.";
@@ -123,98 +162,85 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             const SizedBox(
-                              height: 15,
+                              width: 10,
                             ),
-                            FadeInUp(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: LoginTextField(
-                                      pref: const Icon(
-                                        CupertinoIcons.pin_fill,
-                                        color: textColor,
-                                      ),
-                                      controllerValue: ctlHeight,
-                                      hintText: 'Height',
-                                      inputType: TextInputType.number,
-                                      validate: (val) {
-                                        if (val!.isEmpty) {
-                                          return "Cant be Empty.";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
+                            Expanded(
+                              child: LoginTextField(
+                                pref: const Icon(
+                                  CupertinoIcons.pin_fill,
+                                  color: textColor,
+                                ),
+                                suf: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Kg",
+                                      style: GoogleFonts.nunito(
+                                          color: textColor,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: LoginTextField(
-                                      pref: const Icon(
-                                        CupertinoIcons.pin_fill,
-                                        color: textColor,
-                                      ),
-                                      controllerValue: ctlWeight,
-                                      hintText: 'Weight',
-                                      inputType: TextInputType.number,
-                                      validate: (val) {
-                                        if (val!.isEmpty) {
-                                          return "Cant be Empty.";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                                controllerValue: ctlWeight,
+                                hintText: 'Weight',
+                                inputType: TextInputType.number,
+                                validate: (val) {
+                                  if (val!.isEmpty) {
+                                    return "Cant be Empty.";
+                                  } else {
+                                    return null;
+                                  }
+                                },
                               ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      shape: const StadiumBorder(),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 50, vertical: 10),
-                                      backgroundColor: accentColor),
-                                  onPressed: isLoading
-                                      ? null
-                                      : () {
-                                          final isValid =
-                                              _formKey.currentState!.validate();
-
-                                          if (!isValid) {
-                                            return;
-                                          }
-                                          _formKey.currentState!.save();
-                                          FocusScope.of(context)
-                                              .requestFocus(FocusNode());
-                                          loginUser();
-                                        },
-                                  child: isLoading
-                                      ? const SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: CircularProgressIndicator(
-                                            color: whiteColor,
-                                          ),
-                                        )
-                                      : Text(
-                                          "Sign In",
-                                          style: GoogleFonts.nunito(
-                                              color: textColor,
-                                              fontWeight: FontWeight.bold),
-                                        )),
                             ),
                           ],
                         ),
-                      )
-                    ]),
-              ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 10),
+                                backgroundColor: accentColor),
+                            onPressed: isLoading
+                                ? null
+                                : () {
+                                    final isValid =
+                                        _formKey.currentState!.validate();
+
+                                    if (!isValid) {
+                                      return;
+                                    }
+                                    _formKey.currentState!.save();
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
+                                    loginUser();
+                                  },
+                            child: isLoading
+                                ? const SizedBox(
+                                    height: 15,
+                                    width: 15,
+                                    child: CircularProgressIndicator(
+                                      color: whiteColor,
+                                    ),
+                                  )
+                                : Text(
+                                    "Sign In",
+                                    style: GoogleFonts.nunito(
+                                        color: textColor,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                      ),
+                    ],
+                  ),
+                )
+              ]),
             ),
           ),
         ));

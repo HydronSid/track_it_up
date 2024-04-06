@@ -6,6 +6,8 @@ import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/fade_in_anime.dart';
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
 
+import 'all_product_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -147,17 +149,64 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 20,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                    _allDate.length,
-                    (index) => dateContainer(
-                      index: index,
-                      dayData: _allDate,
+              InkWell(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AllProductScreen())),
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: borderColor),
+                        color: bgColor,
+                        borderRadius: BorderRadius.circular(12)),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.search,
+                          size: 20,
+                          color: whiteColor,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text('search for food.',
+                              style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.bold,
+                                  color: whiteColor)),
+                        )
+                      ],
                     ),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: List.generate(
+              //       _allDate.length,
+              //       (index) => dateContainer(
+              //         index: index,
+              //         dayData: _allDate,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              Text(
+                "Track your  ,",
+                style: GoogleFonts.nunito(
+                    color: textColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
               ),
             ],
           ),
