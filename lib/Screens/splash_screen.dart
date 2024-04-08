@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:track_it_up/Screens/home_screen.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
 import 'login_screen.dart';
+import 'main_home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,7 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
+              builder: (context) => const MainHomeScreen(
+                initPageNumber: 0,
+              ),
             ));
       } else {
         Navigator.push(

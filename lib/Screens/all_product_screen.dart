@@ -9,7 +9,8 @@ import 'product_detail.dart';
 import 'product_model.dart';
 
 class AllProductScreen extends StatefulWidget {
-  const AllProductScreen({super.key});
+  final bool isAppBar;
+  const AllProductScreen({super.key, required this.isAppBar});
 
   @override
   State<AllProductScreen> createState() => _AllProductScreenState();
@@ -89,6 +90,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
             "Foods",
             style: GoogleFonts.nunito(color: whiteColor),
           ),
+          automaticallyImplyLeading: widget.isAppBar,
         ),
         backgroundColor: bgColor,
         body: Column(

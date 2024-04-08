@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:track_it_up/Screens/splash_screen.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/fade_in_anime.dart';
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
@@ -19,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   String userName = "";
   DateTime today = DateTime.now();
   var format = DateFormat('hh:mm a');
-
+  PageController _ctlPageController = PageController();
+  int currentIndex = 0;
   var openTime = "";
   int selectedDate = 0;
   int? selectedTime;
@@ -31,6 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     nb.setStatusBarColor(bgColor);
+    _ctlPageController = PageController(initialPage: 0, viewportFraction: 0.75);
+
     initData();
     super.initState();
   }
@@ -84,8 +90,21 @@ class _HomeScreenState extends State<HomeScreen> {
     'Dec'
   ];
 
+  List title = [
+    'Calories',
+    'Protein',
+    'Carbs',
+  ];
+
+  @override
+  void dispose() {
+    _ctlPageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
       body: SafeArea(
@@ -139,9 +158,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     const Spacer(),
-                    const Icon(
-                      Icons.settings,
-                      color: textColor,
+                    InkWell(
+                      onTap: () async {
+                        final preferences =
+                            await SharedPreferences.getInstance();
+                        await preferences.clear();
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const SplashScreen()),
+                            (Route<dynamic> route) => false);
+                      },
+                      child: const Icon(
+                        Icons.logout_rounded,
+                        color: textColor,
+                      ),
                     )
                   ],
                 ),
@@ -153,7 +183,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AllProductScreen())),
+                        builder: (context) => const AllProductScreen(
+                              isAppBar: true,
+                            ))),
                 child: Card(
                   margin: EdgeInsets.zero,
                   elevation: 4,
@@ -208,6 +240,135 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.bold,
                     fontSize: 18),
               ),
+              SizedBox(
+                  height: size.height * 0.27,
+                  width: size.width,
+                  child: PageView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      controller: _ctlPageController,
+                      onPageChanged: (value) {
+                        setState(() {
+                          currentIndex = value;
+                        });
+                      },
+                      itemBuilder: ((context, index) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 15),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: const Color.fromARGB(255, 74, 77, 95),
+                          ),
+                          width: size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title[index],
+                                style: GoogleFonts.nunito(
+                                    color: textColor, fontSize: 18),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  CircularPercentIndicator(
+                                    restartAnimation: false,
+                                    animateFromLastPercent: true,
+                                    animation: true,
+                                    animationDuration: 1000,
+                                    radius: 55.0,
+                                    lineWidth: 10.0,
+                                    percent: 0.8,
+                                    center: Text(
+                                      "2500\nRemaining",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.nunito(
+                                          color: textColor,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    backgroundColor: bgColor,
+                                    progressColor: accentColor,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Spacer(),
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.golf_course_sharp,
+                                            color: whiteColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "Base Goal",
+                                                style: GoogleFonts.nunito(
+                                                    color: textColor,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14),
+                                              ),
+                                              Text(
+                                                "2550",
+                                                style: GoogleFonts.nunito(
+                                                    color: textColor,
+                                                    fontSize: 14),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.golf_course_sharp,
+                                            color: whiteColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "Food",
+                                                style: GoogleFonts.nunito(
+                                                    color: textColor,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14),
+                                              ),
+                                              Text(
+                                                "0",
+                                                style: GoogleFonts.nunito(
+                                                    color: textColor,
+                                                    fontSize: 14),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      }))),
             ],
           ),
         ),
