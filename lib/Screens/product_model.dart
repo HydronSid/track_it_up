@@ -1,7 +1,7 @@
 class ProductModel {
   final String? id;
   final String? name;
-  final String? nutrition;
+  final String? fats;
   final String? foodtype;
   final String? calories;
   final String? protein;
@@ -11,7 +11,7 @@ class ProductModel {
   ProductModel({
     this.id,
     this.name,
-    this.nutrition,
+    this.fats,
     this.foodtype,
     this.calories,
     this.protein,
@@ -22,7 +22,7 @@ class ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"] ?? "",
         name: json["name"] ?? "",
-        nutrition: json["nutrition"] ?? "",
+        fats: json["fats"] ?? "",
         foodtype: json["foodtype"] ?? "",
         calories: json["calories"] ?? "",
         protein: json["protein"] ?? "",

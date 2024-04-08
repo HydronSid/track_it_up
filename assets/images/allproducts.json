@@ -2,44 +2,152 @@
     {
         "id":"0",
         "name":"Rice",
-        "nutrition":"3",
+        "fats":"3",
         "foodtype":"Veg",
-        "calories":"130",
-        "protein":"2.7",
-        "carbohydrate":"28",
+        "calories":"65",
+        "protein":"1.5",
+        "carbohydrate":"14",
         "image":"rice.jpg"
     },
     {
         "id":"1",
-        "name":"Chana Daal",
-        "nutrition":"3",
+        "name":"Paneer",
+        "fats":"12",
         "foodtype":"Veg",
-        "calories":"130",
-        "protein":"2.7",
-        "carbohydrate":"28",
-        "image":"chana_daal.jpg"
+        "calories":"145",
+        "protein":"10",
+        "carbohydrate":"14",
+        "image":"tofu.jpg"
         
     },
     {
         "id":"2",
-        "name":"Avocado",
-        "nutrition":"3",
+        "name":"Soya Bean",
+        "fats":"1",
         "foodtype":"Veg",
-        "calories":"130",
-        "protein":"2.7",
-        "carbohydrate":"28",
-        "image":"avocado.jpg"
-        
+        "calories":"164",
+        "protein":"27",
+        "carbohydrate":"18",
+        "image":"soya_bean.jpg"  
     },
     {
         "id":"3",
-        "name":"Broccoli",
-        "nutrition":"3",
+        "name":"Sweet Potato",
+        "fats":"0",
         "foodtype":"Veg",
-        "calories":"130",
-        "protein":"2.7",
-        "carbohydrate":"28",
+        "calories":"43",
+        "protein":"1",
+        "carbohydrate":"10",
+        "image":"sweet_potato.jpg"
+    },
+    {
+        "id":"4",
+        "name":"Mushroom",
+        "fats":"0.2",
+        "foodtype":"Veg",
+        "calories":"11",
+        "protein":"2",
+        "carbohydrate":"2",
+        "image":"mushroom.jpg"
+    },
+    {
+        "id":"5",
+        "name":"Rajma",
+        "fats":"0.3",
+        "foodtype":"Veg",
+        "calories":"64",
+        "protein":"4",
+        "carbohydrate":"11",
+        "image":"rajma.jpg"
+    },
+    {
+        "id":"6",
+        "name":"Chickpeas",
+        "fats":"1.3",
+        "foodtype":"Veg",
+        "calories":"82",
+        "protein":"4",
+        "carbohydrate":"12",
+        "image":"chick_peas.jpg"
+    },
+    {
+        "id":"7",
+        "name":"Potato",
+        "fats":"0.1",
+        "foodtype":"Veg",
+        "calories":"43",
+        "protein":"1",
+        "carbohydrate":"10",
+        "image":"rice.jpg"
+    },
+    {
+        "id":"8",
+        "name":"Spinach",
+        "fats":"0.1",
+        "foodtype":"Veg",
+        "calories":"12",
+        "protein":"1",
+        "carbohydrate":"2",
+        "image":"rice.jpg"
+    },
+    {
+        "id":"9",
+        "name":"Chicken Breast",
+        "fats":"1.3",
+        "foodtype":"Non-Veg",
+        "calories":"58",
+        "protein":"11",
+        "carbohydrate":"0",
+        "image":"chicken_breast.jpg"
+    },
+    {
+        "id":"10",
+        "name":"Chicken Leg",
+        "fats":"2.9",
+        "foodtype":"Non-Veg",
+        "calories":"65",
+        "protein":"9",
+        "carbohydrate":"1",
+        "image":"chicken_leg.jpg"
+    },
+    {
+        "id":"11",
+        "name":"Salmon",
+        "fats":"2.8",
+        "foodtype":"Non-Veg",
+        "calories":"78",
+        "protein":"13",
+        "carbohydrate":"0",
+        "image":"salmon.jpg"
+    },
+    {
+        "id":"12",
+        "name":"Broccoli",
+        "fats":"0.2",
+        "foodtype":"Veg",
+        "calories":"18",
+        "protein":"1",
+        "carbohydrate":"4",
         "image":"broccoli.jpg"
-        
+    },
+    {
+        "id":"13",
+        "name":"Peanut Butter",
+        "fats":"25.7",
+        "foodtype":"Veg",
+        "calories":"300",
+        "protein":"11",
+        "carbohydrate":"11",
+        "image":"peanut_butter.jpg"
+    },
+    {
+        "id":"14",
+        "name":"Dal",
+        "fats":"2.3",
+        "foodtype":"Veg",
+        "calories":"50",
+        "protein":"2",
+        "carbohydrate":"8",
+        "image":"chana_daal.jpg"
     }
 ]

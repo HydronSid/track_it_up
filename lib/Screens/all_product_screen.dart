@@ -126,6 +126,9 @@ class _AllProductScreenState extends State<AllProductScreen> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             searchResultList.isEmpty
                 ? Expanded(
                     child: Image.asset(
