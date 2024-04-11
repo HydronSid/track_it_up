@@ -19,7 +19,6 @@ class ProductOperations {
   insertingProduct({
     required String prodId,
     required String name,
-    required String fats,
     required String foodtype,
     required String calories,
     required String protein,
@@ -29,7 +28,6 @@ class ProductOperations {
     int i = await DatabaseHelper.instance.insert({
       "prodId": prodId,
       "name": name,
-      "fats": fats,
       "foodtype": foodtype,
       "calories": calories,
       "protein": protein,

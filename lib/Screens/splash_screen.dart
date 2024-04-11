@@ -44,7 +44,6 @@ class _SplashScreenState extends State<SplashScreen> {
       ProductOperations().insertingProduct(
           prodId: element["prodId"],
           name: element["name"],
-          fats: element["fats"],
           foodtype: element["foodtype"],
           calories: element["calories"],
           protein: element["protein"],

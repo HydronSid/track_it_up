@@ -181,63 +181,6 @@ class ProductDetailScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Fats",
-                                    style: GoogleFonts.nunito(
-                                        color: blackColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "${productModel.fats!} gms",
-                                    style: GoogleFonts.nunito(
-                                        color: blackColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              LinearPercentIndicator(
-                                restartAnimation: false,
-                                animation: true,
-                                fillColor: Colors.transparent,
-                                animateFromLastPercent: true,
-                                animationDuration: 1000,
-                                width: size.width * 0.8,
-                                lineHeight: 10.0,
-                                percent:
-                                    ((double.parse(productModel.fats!) / 30) *
-                                            100) /
-                                        100,
-                                backgroundColor: Colors.grey,
-                                barRadius: const Radius.circular(16),
-                                progressColor:
-                                    const Color.fromARGB(255, 59, 82, 255),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
                                     "Calories",
                                     style: GoogleFonts.nunito(
                                         color: blackColor,

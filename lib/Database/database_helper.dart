@@ -41,7 +41,6 @@ class DatabaseHelper {
     id INTEGER PRIMARY KEY,
     prodId TEXT NOT NULL,
     name TEXT NOT NULL,
-    fats TEXT NOT NULL, 
     foodtype TEXT NOT NULL,
     calories TEXT NOT NULL,  
     protein TEXT NOT NULL,
