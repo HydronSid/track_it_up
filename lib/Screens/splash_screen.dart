@@ -27,10 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void getLoginStatus() async {
     bool status = await LocalPreferences().getLoginBool() ?? false;
 
-    final tableExist = await ProductDbHelper.productInstance.tableExists();
+    final tableExist = await DatabaseHelper.instance
+        .tableExists(DatabaseHelper.productDBTableName);
 
     if (tableExist) {
-      await ProductDbHelper.productInstance.truncateTableIfExists();
+      await DatabaseHelper.instance
+          .truncateTableIfExists(DatabaseHelper.productDBTableName);
     }
 
     String responce =
@@ -38,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
     List<dynamic> extractedData = await json.decode(responce);
 
     for (var element in extractedData) {
-      insertingCart(
+      ProductOperations().insertingProduct(
           prodId: element["prodId"],
           name: element["name"],
           fats: element["fats"],

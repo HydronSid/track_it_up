@@ -5,40 +5,30 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
-class ProductDbHelper {
-  static const _productDBName = 'productdatabase.db';
-  static const _productDBVersion = 1;
-  static const _productDBTableName = "productTable";
+class DatabaseHelper {
+  static const databaseName = 'trackitupdatabase.db';
+  static const databaseVersion = 1;
+  static const productDBTableName = "productTable";
+  static const userDBTableName = "userTable";
 
-  static const id = "id";
-  static const prodId = "prodId";
-  static const name = "name";
-  static const fats = "fats";
-  static const foodtype = "foodtype";
-  static const calories = "calories";
-  static const protein = "protein";
-  static const carbohydrate = "carbohydrate";
-  static const image = "image";
+  DatabaseHelper._privateConstructor();
 
-  ProductDbHelper._privateConstructor();
+  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  static final ProductDbHelper productInstance =
-      ProductDbHelper._privateConstructor();
-
-  static Database? _productDatabase;
+  static Database? _database;
 
   Future<Database?> get database async {
-    if (_productDatabase != null) return _productDatabase;
-    _productDatabase = await _initialiseDatabase();
-    return _productDatabase;
+    if (_database != null) return _database;
+    _database = await _initialiseDatabase();
+    return _database;
   }
 
   _initialiseDatabase() async {
     try {
       Directory directory = await getApplicationDocumentsDirectory();
-      String path = join(directory.path, _productDBName);
+      String path = join(directory.path, databaseName);
       return await openDatabase(path,
-          version: _productDBVersion, onCreate: _onCreate);
+          version: databaseVersion, onCreate: _onCreate);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -47,61 +37,66 @@ class ProductDbHelper {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
   CREATE TABLE IF NOT EXISTS productTable(
-    $id INTEGER PRIMARY KEY,
-    $prodId TEXT NOT NULL,
-    $name TEXT NOT NULL,
-    $fats TEXT NOT NULL, 
-    $foodtype TEXT NOT NULL,
-    $calories TEXT NOT NULL,  
-    $protein TEXT NOT NULL,
-    $carbohydrate TEXT NOT NULL,
-    $image TEXT NOT NULL
+    id INTEGER PRIMARY KEY,
+    prodId TEXT NOT NULL,
+    name TEXT NOT NULL,
+    fats TEXT NOT NULL, 
+    foodtype TEXT NOT NULL,
+    calories TEXT NOT NULL,  
+    protein TEXT NOT NULL,
+    carbohydrate TEXT NOT NULL,
+    image TEXT NOT NULL
+    );
+  ''');
+    await db.execute('''
+  CREATE TABLE IF NOT EXISTS userTable(
+    id INTEGER PRIMARY KEY,
+    userId TEXT NOT NULL,
+    name VARCHAR,
+    height TEXT NOT NULL, 
+    weight TEXT NOT NULL
     );
   ''');
   }
 
-  Future turncatetable() async {
-    Database? db = await productInstance.database;
-
-    await truncateTableIfExists();
+  Future turncatetable(String tableName) async {
+    await truncateTableIfExists(tableName);
   }
 
-  Future<int> insert(Map<String, dynamic> row) async {
-    Database? db = await productInstance.database;
-    return await db!.insert(ProductDbHelper._productDBTableName, row);
+  Future<int> insert(Map<String, dynamic> row, String tableName) async {
+    Database? db = await instance.database;
+    return await db!.insert(tableName, row);
   }
 
-  Future<List<Map<String, dynamic>>> quaryAll() async {
-    Database? db = await productInstance.database;
+  Future<List<Map<String, dynamic>>> quaryAll(String tableName) async {
+    Database? db = await instance.database;
 
-    return await db!.query(_productDBTableName);
+    return await db!.query(tableName);
   }
 
-  Future<int> delete(int id) async {
-    Database? db = await productInstance.database;
+  Future<int> delete(String id, String tableName) async {
+    Database? db = await instance.database;
 
-    return await db!
-        .delete(_productDBTableName, where: '$prodId =?', whereArgs: [id]);
+    return await db!.delete(tableName, where: 'id =?', whereArgs: [id]);
   }
 
-  checkProduct(String pid) async {
+  checkProduct(String checkKey, String value, String tableName) async {
     Database? db = await database;
-    var data = await db!
-        .rawQuery("SELECT * FROM $_productDBTableName WHERE $prodId=$pid");
+    var data =
+        await db!.rawQuery("SELECT * FROM $tableName WHERE $checkKey=$value");
     return data;
   }
 
-  dropTable() async {
+  dropTable(String tableName) async {
     Database? db = await database;
-    return await db!.rawQuery("DROP TABLE IF EXISTS $_productDBTableName");
+    return await db!.rawQuery("DROP TABLE IF EXISTS $tableName");
   }
 
-  Future<int> update(Map<String, dynamic> row) async {
-    Database? db = await productInstance.database;
-    int id = int.parse(row[prodId]);
+  Future<int> update(Map<String, dynamic> row, String tableName) async {
+    Database? db = await instance.database;
+    int id = int.parse(row["id"]);
 
-    return await db!.update(_productDBTableName, row,
-        where: '$prodId = ?', whereArgs: [id]);
+    return await db!.update(tableName, row, where: 'id = ?', whereArgs: [id]);
   }
 
   // sumFinalProductTotal() async {
@@ -110,63 +105,66 @@ class ProductDbHelper {
   //   return data;
   // }
 
-  Future<void> truncateTableIfExists() async {
-    Database? db = await productInstance.database;
-    final tableExist = await tableExists();
+  Future<void> truncateTableIfExists(String tableName) async {
+    Database? db = await instance.database;
+    final tableExist = await tableExists(tableName);
     if (tableExist) {
-      await db!.execute('DELETE FROM $_productDBTableName');
+      await db!.execute('DELETE FROM $tableName');
     }
   }
 
-  Future<bool> tableExists() async {
-    Database? db = await productInstance.database;
+  Future<bool> tableExists(String tableName) async {
+    Database? db = await instance.database;
     final result = await db!.rawQuery(
-      "SELECT name FROM sqlite_master WHERE type='table' AND name='$_productDBTableName'",
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='$tableName'",
     );
     return result.isNotEmpty;
   }
 }
 
-List<Map<String, dynamic>> queryRows = [];
+class ProductOperations {
+  List<Map<String, dynamic>> queryRows = [];
 
-turncateCart() async {
-  await ProductDbHelper.productInstance
-      .turncatetable(); // debugPrint('Rows affected $rowsAffected');
-}
+  turncate(String tableName) async {
+    await DatabaseHelper.instance
+        .turncatetable(tableName); // debugPrint('Rows affected $rowsAffected');
+  }
 
-getAllData() async {
-  queryRows = await ProductDbHelper.productInstance.quaryAll();
+  getAllData() async {
+    queryRows = await DatabaseHelper.instance
+        .quaryAll(DatabaseHelper.productDBTableName);
 
-  return queryRows;
-}
+    return queryRows;
+  }
 
-insertingCart({
-  required String prodId,
-  required String name,
-  required String fats,
-  required String foodtype,
-  required String calories,
-  required String protein,
-  required String carbohydrate,
-  required String image,
-}) async {
-  int i = await ProductDbHelper.productInstance.insert({
-    ProductDbHelper.prodId: prodId,
-    ProductDbHelper.name: name,
-    ProductDbHelper.fats: fats,
-    ProductDbHelper.foodtype: foodtype,
-    ProductDbHelper.calories: calories,
-    ProductDbHelper.protein: protein,
-    ProductDbHelper.carbohydrate: carbohydrate,
-    ProductDbHelper.image: image,
-  });
+  insertingProduct({
+    required String prodId,
+    required String name,
+    required String fats,
+    required String foodtype,
+    required String calories,
+    required String protein,
+    required String carbohydrate,
+    required String image,
+  }) async {
+    int i = await DatabaseHelper.instance.insert({
+      "prodId": prodId,
+      "name": name,
+      "fats": fats,
+      "foodtype": foodtype,
+      "calories": calories,
+      "protein": protein,
+      "carbohydrate": carbohydrate,
+      "image": image,
+    }, DatabaseHelper.productDBTableName);
 
-  debugPrint('the inserted id is $i');
-}
+    debugPrint('the inserted id is $i');
+  }
 
-deletingCart({required String id}) async {
-  int rowsAffected =
-      await ProductDbHelper.productInstance.delete(int.parse(id));
+  deletingProduct({required String id}) async {
+    int rowsAffected = await DatabaseHelper.instance
+        .delete(id, DatabaseHelper.productDBTableName);
 
-  debugPrint('Rows affected $rowsAffected');
+    debugPrint('Rows affected $rowsAffected');
+  }
 }

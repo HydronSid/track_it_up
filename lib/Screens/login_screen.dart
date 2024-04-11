@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
-import 'package:track_it_up/Utils/local_shared_preferences.dart';
 import 'package:track_it_up/Widgets/input_fields.dart';
 
 import 'main_home_screen.dart';
@@ -37,11 +36,16 @@ class _LoginScreenState extends State<LoginScreen> {
       isLoading = true;
     });
 
-    Future.delayed(const Duration(seconds: 3), () {
-      LocalPreferences().setUserName(ctlName.text.trim());
-      LocalPreferences().setUserHeight(ctlHeight.text.trim());
-      LocalPreferences().setUserWeight(ctlWeight.text.trim());
-      LocalPreferences().setLoginBool(true);
+    Future.delayed(const Duration(seconds: 3), () async {
+      // LocalPreferences().setUserName(ctlName.text.trim());
+      // LocalPreferences().setUserHeight(ctlHeight.text.trim());
+      // LocalPreferences().setUserWeight(ctlWeight.text.trim());
+      // LocalPreferences().setLoginBool(true);
+
+      // var helper =
+      //     await UserDbHelper.userInstance.checkUser(ctlName.text.trim());
+
+      // print(helper);
 
       setState(() {
         isLoading = false;
