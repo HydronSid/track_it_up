@@ -1,4 +1,4 @@
-import 'package:track_it_up/Database/product_db_helper.dart';
+import 'package:track_it_up/Database/product_operations.dart';
 import 'package:track_it_up/Screens/product_model.dart';
 
 class CommonFunctions {

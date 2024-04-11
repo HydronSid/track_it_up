@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:track_it_up/Database/product_db_helper.dart';
+import 'package:track_it_up/Database/database_helper.dart';
+import 'package:track_it_up/Database/product_operations.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
