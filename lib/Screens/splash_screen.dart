@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:track_it_up/Database/product_db_helper.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
@@ -22,6 +26,28 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void getLoginStatus() async {
     bool status = await LocalPreferences().getLoginBool() ?? false;
+
+    final tableExist = await ProductDbHelper.productInstance.tableExists();
+
+    if (tableExist) {
+      await ProductDbHelper.productInstance.truncateTableIfExists();
+    }
+
+    String responce =
+        await rootBundle.loadString('assets/images/allproducts.json');
+    List<dynamic> extractedData = await json.decode(responce);
+
+    for (var element in extractedData) {
+      insertingCart(
+          prodId: element["prodId"],
+          name: element["name"],
+          fats: element["fats"],
+          foodtype: element["foodtype"],
+          calories: element["calories"],
+          protein: element["protein"],
+          carbohydrate: element["carbohydrate"],
+          image: element["image"]);
+    }
 
     Future.delayed(const Duration(seconds: 3), () {
       if (status) {

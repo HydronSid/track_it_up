@@ -22,13 +22,13 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-      id: json["id"] ?? "",
-      name: json["name"] ?? "",
-      fats: json["fats"] ?? "",
-      foodtype: json["foodtype"] ?? "",
-      calories: json["calories"] ?? "",
-      protein: json["protein"] ?? "",
-      carbohydrate: json["carbohydrate"],
+      id: json["id"].toString(),
+      name: json["name"].toString(),
+      fats: json["fats"].toString(),
+      foodtype: json["foodtype"].toString(),
+      calories: json["calories"].toString(),
+      protein: json["protein"].toString(),
+      carbohydrate: json["carbohydrate"].toString(),
       image: "assets/images/${json["image"]}",
       quantity: "4");
 }

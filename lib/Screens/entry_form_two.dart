@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
+import 'package:track_it_up/Utils/common_functions.dart';
 
 import 'product_model.dart';
 
@@ -28,14 +26,7 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
 
     searchController.addListener(onSearchChanged);
 
-    String responce =
-        await rootBundle.loadString('assets/images/allproducts.json');
-    List<dynamic> extractedData = await json.decode(responce);
-    productList = extractedData
-        .map(
-          (e) => ProductModel.fromJson(e),
-        )
-        .toList();
+    productList = await CommonFunctions().getProductList();
 
     searchResulList();
   }
