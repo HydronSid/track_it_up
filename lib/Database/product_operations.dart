@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'database_helper.dart';
 
 class ProductOperations {
   List<Map<String, dynamic>> queryRows = [];
 
-  turncate(String tableName) async {
+  turncateProductTable() async {
     await DatabaseHelper.instance
-        .turncatetable(tableName); // debugPrint('Rows affected $rowsAffected');
+        .truncateTableIfExists(DatabaseHelper.productDBTableName);
   }
 
-  getAllData() async {
+  getAllProductData() async {
     queryRows = await DatabaseHelper.instance
         .quaryAll(DatabaseHelper.productDBTableName);
 
@@ -43,7 +42,7 @@ class ProductOperations {
 
   deletingProduct({required String id}) async {
     int rowsAffected = await DatabaseHelper.instance
-        .delete(id, DatabaseHelper.productDBTableName);
+        .deleteRecordFromTable(id, DatabaseHelper.productDBTableName);
 
     debugPrint('Rows affected $rowsAffected');
   }

@@ -59,10 +59,6 @@ class DatabaseHelper {
   ''');
   }
 
-  Future turncatetable(String tableName) async {
-    await truncateTableIfExists(tableName);
-  }
-
   Future<int> insert(Map<String, dynamic> row, String tableName) async {
     Database? db = await instance.database;
     return await db!.insert(tableName, row);
@@ -74,13 +70,13 @@ class DatabaseHelper {
     return await db!.query(tableName);
   }
 
-  Future<int> delete(String id, String tableName) async {
+  Future<int> deleteRecordFromTable(String id, String tableName) async {
     Database? db = await instance.database;
 
     return await db!.delete(tableName, where: 'id =?', whereArgs: [id]);
   }
 
-  checkProduct(String checkKey, String value, String tableName) async {
+  checkIfPresent(String checkKey, String value, String tableName) async {
     Database? db = await database;
     var data =
         await db!.rawQuery("SELECT * FROM $tableName WHERE $checkKey=$value");
@@ -92,7 +88,7 @@ class DatabaseHelper {
     return await db!.rawQuery("DROP TABLE IF EXISTS $tableName");
   }
 
-  Future<int> update(Map<String, dynamic> row, String tableName) async {
+  Future<int> updateTable(Map<String, dynamic> row, String tableName) async {
     Database? db = await instance.database;
     int id = int.parse(row["id"]);
 

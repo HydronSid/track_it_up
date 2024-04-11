@@ -5,7 +5,7 @@ class CommonFunctions {
   List<Map<String, dynamic>> queryRows = [];
   Future<List<ProductModel>> getProductList() async {
     queryRows.toList().clear();
-    queryRows = await ProductOperations().getAllData();
+    queryRows = await ProductOperations().getAllProductData();
 
     return queryRows
         .toList()
