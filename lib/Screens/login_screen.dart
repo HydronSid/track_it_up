@@ -3,8 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:track_it_up/Database/database_helper.dart';
+import 'package:track_it_up/Database/user_operations.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
+import 'package:track_it_up/Utils/common_functions.dart';
 import 'package:track_it_up/Widgets/input_fields.dart';
 
 import 'main_home_screen.dart';
@@ -42,21 +45,32 @@ class _LoginScreenState extends State<LoginScreen> {
       // LocalPreferences().setUserWeight(ctlWeight.text.trim());
       // LocalPreferences().setLoginBool(true);
 
-      // var helper =
-      //     await UserDbHelper.userInstance.checkUser(ctlName.text.trim());
+      var present = await DatabaseHelper.instance.checkIfPresent(
+          'name', ctlName.text.trim(), DatabaseHelper.userDBTableName);
 
-      // print(helper);
-
-      setState(() {
-        isLoading = false;
-      });
-
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const MainHomeScreen(
-                    initPageNumber: 0,
-                  )));
+      if (present) {
+        CommonFunctions.showErrorSnackbar("Username is already taken.");
+        setState(() {
+          isLoading = false;
+        });
+      } else {
+        UserOperations()
+            .insertUser(
+                name: ctlName.text.trim(),
+                height: ctlHeight.text.trim(),
+                weight: ctlWeight.text.trim())
+            .then((value) {
+          setState(() {
+            isLoading = false;
+          });
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MainHomeScreen(
+                        initPageNumber: 0,
+                      )));
+        });
+      }
     });
   }
 

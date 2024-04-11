@@ -17,14 +17,12 @@ class UserOperations {
     return queryRows;
   }
 
-  insertUser({
-    required String userId,
+  Future insertUser({
     required String name,
     required String height,
     required String weight,
   }) async {
     int i = await DatabaseHelper.instance.insert({
-      "userId": userId,
       "name": name,
       "height": height,
       "weight": weight,

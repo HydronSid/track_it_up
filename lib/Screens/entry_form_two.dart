@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/common_functions.dart';
 
-import 'product_model.dart';
+import '../Models/product_model.dart';
 
 class EntryFormTwoCalulate extends StatefulWidget {
   const EntryFormTwoCalulate({super.key});

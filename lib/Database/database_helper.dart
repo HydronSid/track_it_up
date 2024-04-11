@@ -51,7 +51,6 @@ class DatabaseHelper {
     await db.execute('''
   CREATE TABLE IF NOT EXISTS userTable(
     id INTEGER PRIMARY KEY,
-    userId TEXT NOT NULL,
     name VARCHAR,
     height TEXT NOT NULL, 
     weight TEXT NOT NULL
@@ -78,9 +77,9 @@ class DatabaseHelper {
 
   checkIfPresent(String checkKey, String value, String tableName) async {
     Database? db = await database;
-    var data =
-        await db!.rawQuery("SELECT * FROM $tableName WHERE $checkKey=$value");
-    return data;
+    var data = await db!
+        .rawQuery('SELECT * FROM $tableName WHERE $checkKey = ?', [value]);
+    return data.toList().isNotEmpty;
   }
 
   dropTable(String tableName) async {
