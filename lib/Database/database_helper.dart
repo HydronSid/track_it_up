@@ -10,6 +10,7 @@ class DatabaseHelper {
   static const databaseVersion = 1;
   static const productDBTableName = "productTable";
   static const userDBTableName = "userTable";
+  static const mealDBTableName = "mealTable";
 
   DatabaseHelper._privateConstructor();
 
@@ -54,6 +55,20 @@ class DatabaseHelper {
     name VARCHAR,
     height TEXT NOT NULL, 
     weight TEXT NOT NULL
+    );
+  ''');
+    await db.execute('''
+  CREATE TABLE IF NOT EXISTS mealTable(
+    id INTEGER PRIMARY KEY,
+    prodId TEXT NOT NULL,
+    name TEXT NOT NULL,
+    carbohydrate TEXT NOT NULL,
+    quantity TEXT NOT NULL,
+    totalCalories TEXT NOT NULL,
+    createdOn TEXT NOT NULL,
+    updatedAt TEXT NOT NULL,
+    mealType TEXT NOT NULL,
+    userId TEXT NOT NULL
     );
   ''');
   }
@@ -114,5 +129,13 @@ class DatabaseHelper {
       "SELECT name FROM sqlite_master WHERE type='table' AND name='$tableName'",
     );
     return result.isNotEmpty;
+  }
+
+  Future<List<Map<String, dynamic>>> quaryAllByType(
+      String tableName, String type, String uId) async {
+    Database? db = await instance.database;
+
+    return await db!
+        .rawQuery("SELECT * $tableName WHERE type=$type AND userId=$uId");
   }
 }

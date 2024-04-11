@@ -8,6 +8,7 @@ import 'package:track_it_up/Database/user_operations.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
 import 'package:track_it_up/Utils/common_functions.dart';
+import 'package:track_it_up/Utils/local_shared_preferences.dart';
 import 'package:track_it_up/Widgets/input_fields.dart';
 
 import 'main_home_screen.dart';
@@ -40,11 +41,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     Future.delayed(const Duration(seconds: 3), () async {
-      // LocalPreferences().setUserName(ctlName.text.trim());
-      // LocalPreferences().setUserHeight(ctlHeight.text.trim());
-      // LocalPreferences().setUserWeight(ctlWeight.text.trim());
-      // LocalPreferences().setLoginBool(true);
-
       var present = await DatabaseHelper.instance.checkIfPresent(
           'name', ctlName.text.trim(), DatabaseHelper.userDBTableName);
 
@@ -54,6 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
           isLoading = false;
         });
       } else {
+        LocalPreferences().setLoginBool(true);
+        LocalPreferences().setUserName(ctlName.text.trim());
+        LocalPreferences().setUserHeight(ctlHeight.text.trim());
+        LocalPreferences().setUserWeight(ctlWeight.text.trim());
         UserOperations()
             .insertUser(
                 name: ctlName.text.trim(),
