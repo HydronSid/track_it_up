@@ -9,7 +9,7 @@ import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/fade_in_anime.dart';
 import 'package:track_it_up/Utils/local_shared_preferences.dart';
 
-import 'all_product_screen.dart';
+import 'entry_form.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -179,196 +179,50 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 20,
               ),
-              InkWell(
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AllProductScreen(
-                              isAppBar: true,
-                            ))),
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: borderColor),
-                        color: bgColor,
-                        borderRadius: BorderRadius.circular(12)),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.search,
-                          size: 20,
-                          color: whiteColor,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text('search for food.',
-                              style: GoogleFonts.nunito(
-                                  fontWeight: FontWeight.bold,
-                                  color: whiteColor)),
-                        )
-                      ],
-                    ),
+              Row(
+                children: [
+                  Text(
+                    "Track your Nutrition,",
+                    style: GoogleFonts.nunito(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
                   ),
-                ),
+                  const Spacer(),
+                  ElevatedButton(
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const EntryFormCalulate())),
+                      child: const Text("Go"))
+                ],
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Row(
-              //     children: List.generate(
-              //       _allDate.length,
-              //       (index) => dateContainer(
-              //         index: index,
-              //         dayData: _allDate,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              Text(
-                "Track your  ,",
-                style: GoogleFonts.nunito(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-              SizedBox(
-                  height: size.height * 0.27,
-                  width: size.width,
-                  child: PageView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 3,
-                      controller: _ctlPageController,
-                      onPageChanged: (value) {
-                        setState(() {
-                          currentIndex = value;
-                        });
-                      },
-                      itemBuilder: ((context, index) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15),
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: const Color.fromARGB(255, 74, 77, 95),
-                          ),
-                          width: size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                title[index],
-                                style: GoogleFonts.nunito(
-                                    color: textColor, fontSize: 18),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                children: [
-                                  CircularPercentIndicator(
-                                    restartAnimation: false,
-                                    animateFromLastPercent: true,
-                                    animation: true,
-                                    animationDuration: 1000,
-                                    radius: 55.0,
-                                    lineWidth: 10.0,
-                                    percent: 0.8,
-                                    center: Text(
-                                      "2500\nRemaining",
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.nunito(
-                                          color: textColor,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    backgroundColor: bgColor,
-                                    progressColor: accentColor,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Spacer(),
-                                  Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.golf_course_sharp,
-                                            color: whiteColor,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Text(
-                                                "Base Goal",
-                                                style: GoogleFonts.nunito(
-                                                    color: textColor,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14),
-                                              ),
-                                              Text(
-                                                "2550",
-                                                style: GoogleFonts.nunito(
-                                                    color: textColor,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.golf_course_sharp,
-                                            color: whiteColor,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Text(
-                                                "Food",
-                                                style: GoogleFonts.nunito(
-                                                    color: textColor,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14),
-                                              ),
-                                              Text(
-                                                "0",
-                                                style: GoogleFonts.nunito(
-                                                    color: textColor,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      }))),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: const [
+                      TrackerWidget(
+                        title: "Calories",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TrackerWidget(
+                        title: "Protein",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TrackerWidget(
+                        title: "Carbs",
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -431,6 +285,123 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TrackerWidget extends StatelessWidget {
+  final String title;
+  const TrackerWidget({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: const Color.fromARGB(255, 74, 77, 95),
+      ),
+      width: size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.nunito(color: textColor, fontSize: 18),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              CircularPercentIndicator(
+                restartAnimation: false,
+                animateFromLastPercent: true,
+                animation: true,
+                animationDuration: 1000,
+                radius: 55.0,
+                lineWidth: 10.0,
+                percent: 0.8,
+                center: Text(
+                  "2500\nRemaining",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.nunito(
+                      color: textColor,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold),
+                ),
+                backgroundColor: bgColor,
+                progressColor: accentColor,
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Column(
+                    children: const [
+                      Icon(
+                        Icons.golf_course_sharp,
+                        color: whiteColor,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Icon(
+                        Icons.golf_course_sharp,
+                        color: whiteColor,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Column(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            "Base Goal",
+                            style: GoogleFonts.nunito(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                          Text(
+                            "2550",
+                            style: GoogleFonts.nunito(
+                                color: textColor, fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            "Consumed",
+                            style: GoogleFonts.nunito(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                          Text(
+                            "0",
+                            style: GoogleFonts.nunito(
+                                color: textColor, fontSize: 14),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

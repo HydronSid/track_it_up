@@ -26,6 +26,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
       isAppBar: false,
     ),
     Container(),
+    Container(),
   ];
 
   int _selectedTab = 0;
@@ -94,6 +95,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
             backgroundColor: bgColor,
             elevation: 0,
             currentIndex: _selectedTab,
+            type: BottomNavigationBarType.fixed,
             selectedLabelStyle: GoogleFonts.nunito(fontSize: 12),
             unselectedLabelStyle: GoogleFonts.nunito(fontSize: 12),
             onTap: (index) => _changeTab(index),
@@ -106,6 +108,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                   icon: Icon(Icons.search), label: "Search"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.fastfood_outlined), label: "Recipes"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.history), label: "History"),
             ],
           ),
         ));

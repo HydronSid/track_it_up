@@ -43,6 +43,8 @@ dependencies:
   shared_preferences: ^2.0.20
   intl: ^0.18.0
   percent_indicator: ^4.2.3
+  flutter_typeahead: ^4.1.1
+  sqflite: ^2.2.8
 
 dev_dependencies:
   flutter_test:
