@@ -4,10 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart' as nb;
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:track_it_up/Models/user_model.dart';
 import 'package:track_it_up/Screens/splash_screen.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
+import 'package:track_it_up/Utils/common_functions.dart';
 import 'package:track_it_up/Utils/fade_in_anime.dart';
-import 'package:track_it_up/Utils/local_shared_preferences.dart';
 
 import 'entry_form.dart';
 
@@ -32,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
   dynamic uptoDate;
   List _allDate = [];
 
+  List helper = [];
+  UserModel userModel = UserModel();
+
   @override
   void initState() {
     nb.setStatusBarColor(bgColor);
@@ -42,7 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   initData() async {
-    userName = await LocalPreferences().getUserName() ?? "";
+    userModel = await CommonFunctions().getUser();
+
+    helper = await CommonFunctions().getAllTodayMealData();
+
+    userName = userModel.name!;
     selectedDate = 0;
     selectedTime = null;
     monthYear = "";
@@ -203,21 +211,36 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: const [
+                    children: [
                       TrackerWidget(
                         title: "Calories",
+                        consumed:
+                            helper.isEmpty ? "0" : helper[0].toStringAsFixed(2),
+                        remaining:
+                            helper.isEmpty ? "0" : helper[3].toStringAsFixed(2),
+                        goal: userModel.requiredCal ?? "0",
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TrackerWidget(
                         title: "Protein",
+                        consumed:
+                            helper.isEmpty ? "0" : helper[1].toStringAsFixed(2),
+                        remaining:
+                            helper.isEmpty ? "0" : helper[4].toStringAsFixed(2),
+                        goal: userModel.requiredProtein ?? "0",
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TrackerWidget(
                         title: "Carbs",
+                        consumed:
+                            helper.isEmpty ? "0" : helper[2].toStringAsFixed(2),
+                        remaining:
+                            helper.isEmpty ? "0" : helper[5].toStringAsFixed(2),
+                        goal: userModel.requiredCarbs ?? "0",
                       ),
                     ],
                   ),
@@ -291,12 +314,20 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class TrackerWidget extends StatelessWidget {
-  final String title;
-  const TrackerWidget({super.key, required this.title});
+  final String title, goal, consumed, remaining;
+
+  const TrackerWidget({
+    super.key,
+    required this.title,
+    required this.consumed,
+    required this.goal,
+    required this.remaining,
+  });
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -317,6 +348,8 @@ class TrackerWidget extends StatelessWidget {
             height: 15,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircularPercentIndicator(
                 restartAnimation: false,
@@ -325,9 +358,12 @@ class TrackerWidget extends StatelessWidget {
                 animationDuration: 1000,
                 radius: 55.0,
                 lineWidth: 10.0,
-                percent: 0.8,
+                percent: goal == "0"
+                    ? 0.0
+                    : ((double.parse(consumed) / double.parse(goal)) * 100) /
+                        100,
                 center: Text(
-                  "2500\nRemaining",
+                  "$remaining\nRemaining",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.nunito(
                       color: textColor,
@@ -338,62 +374,48 @@ class TrackerWidget extends StatelessWidget {
                 progressColor: accentColor,
               ),
               const Spacer(),
-              Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    children: const [
-                      Icon(
-                        Icons.golf_course_sharp,
-                        color: whiteColor,
+                  Row(
+                    children: [
+                      Text(
+                        "Base Goal :",
+                        style: GoogleFonts.nunito(
+                            color: textColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
                       ),
-                      SizedBox(
-                        height: 20,
+                      const SizedBox(
+                        width: 15,
                       ),
-                      Icon(
-                        Icons.golf_course_sharp,
-                        color: whiteColor,
+                      Text(
+                        title == "Calories" ? "$goal Cal" : "$goal g",
+                        style:
+                            GoogleFonts.nunito(color: textColor, fontSize: 14),
                       ),
                     ],
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Column(
+                  Row(
                     children: [
-                      Column(
-                        children: [
-                          Text(
-                            "Base Goal",
-                            style: GoogleFonts.nunito(
-                                color: textColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                          ),
-                          Text(
-                            "2550",
-                            style: GoogleFonts.nunito(
-                                color: textColor, fontSize: 14),
-                          ),
-                        ],
+                      Text(
+                        "Consumed : ",
+                        style: GoogleFonts.nunito(
+                            color: textColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
                       ),
                       const SizedBox(
-                        height: 10,
+                        width: 15,
                       ),
-                      Column(
-                        children: [
-                          Text(
-                            "Consumed",
-                            style: GoogleFonts.nunito(
-                                color: textColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                          ),
-                          Text(
-                            "0",
-                            style: GoogleFonts.nunito(
-                                color: textColor, fontSize: 14),
-                          ),
-                        ],
+                      Text(
+                        title == "Calories" ? "$consumed Cal" : "$consumed g",
+                        style:
+                            GoogleFonts.nunito(color: textColor, fontSize: 14),
                       ),
                     ],
                   ),

@@ -165,7 +165,7 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          "1 g",
+                                          product.serving!,
                                           style: GoogleFonts.nunito(
                                               color: textColor,
                                               fontSize: 14,
@@ -205,7 +205,9 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
                                           mealType: widget.mealType,
                                           userId: userModel.id!,
                                           protein: product.protein!,
-                                          carbohydrate: product.carbohydrate!);
+                                          carbohydrate: product.carbohydrate!,
+                                          serving: product.serving!,
+                                          grams: product.grams!);
 
                                       CommonFunctions.showSuccessSnackbar(
                                           "${product.name!} is added in todays's ${widget.mealType}");

@@ -29,11 +29,17 @@ class UserOperations {
     required String name,
     required String height,
     required String weight,
+    required String requiredCal,
+    required String requiredProtein,
+    required String requiredCarbs,
   }) async {
     int i = await DatabaseHelper.instance.insert({
       "name": name,
       "height": height,
       "weight": weight,
+      "requiredCal": requiredCal,
+      "requiredProtein": requiredProtein,
+      "requiredCarbs": requiredCarbs,
     }, DatabaseHelper.userDBTableName);
 
     debugPrint('the inserted id is $i');

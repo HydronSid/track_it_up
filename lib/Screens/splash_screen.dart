@@ -48,6 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
           calories: element["calories"],
           protein: element["protein"],
           carbohydrate: element["carbohydrate"],
+          serving: element["serving"],
+          grams: element["grams"],
           image: element["image"]);
     }
 

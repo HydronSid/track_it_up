@@ -82,7 +82,9 @@ class CommonFunctions {
     return UserModel.fromJson(queryRows.first);
   }
 
-  Future<List<MealModel>> getMealByTypeDateUser(String type) async {
+  Future<List<MealModel>> getMealByTypeDateUser(
+    String type,
+  ) async {
     UserModel user = await CommonFunctions().getUser();
     queryRows.toList().clear();
     queryRows = await MealOperations().getAllMealByType(type, user.id!);
@@ -95,7 +97,57 @@ class CommonFunctions {
         .toList();
   }
 
+  Future getAllTodayMealData() async {
+    UserModel user = await CommonFunctions().getUser();
+    queryRows.toList().clear();
+    queryRows = await MealOperations().getAllTodayMealData(user.id!);
+
+    var mealList = queryRows
+        .toList()
+        .map(
+          (e) => MealModel.fromJson(e),
+        )
+        .toList();
+
+    double consumedCal = 0.0, consumedProtein = 0.0, consumedCarbs = 0.0;
+    double remainingCal = 0.0, remainingProtein = 0.0, remainingCarbs = 0.0;
+    for (var element in mealList) {
+      consumedCal += double.parse(element.totalCalories!);
+      consumedProtein += double.parse(element.protein!);
+      consumedCarbs += double.parse(element.carbohydrate!);
+    }
+
+    if (mealList.isNotEmpty) {
+      remainingCal = double.parse(user.requiredCal!) - consumedCarbs;
+      remainingProtein = double.parse(user.requiredProtein!) - consumedProtein;
+      remainingCarbs = double.parse(user.requiredProtein!) - consumedCarbs;
+    }
+
+    return [
+      consumedCal,
+      consumedProtein,
+      consumedCarbs,
+      remainingCal,
+      remainingProtein,
+      remainingCarbs
+    ];
+  }
+
   String returnAppDateFormat(DateTime date) {
     return DateFormat('dd-MM-yyyy').format(date);
+  }
+
+  String returnTotalMealCalories(List<MealModel> meal) {
+    if (meal.isEmpty) {
+      return "0";
+    }
+
+    double calories = 0.0;
+
+    for (var element in meal) {
+      calories += double.parse(element.totalCalories!);
+    }
+
+    return calories.toStringAsFixed(2);
   }
 }

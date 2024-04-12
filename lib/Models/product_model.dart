@@ -7,6 +7,8 @@ class ProductModel {
   final String? carbohydrate;
   final String? image;
   final String? quantity;
+  final String? serving;
+  final String? grams;
 
   ProductModel({
     this.id,
@@ -17,6 +19,8 @@ class ProductModel {
     this.carbohydrate,
     this.image,
     this.quantity,
+    this.serving,
+    this.grams,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -26,6 +30,8 @@ class ProductModel {
       calories: json["calories"].toString(),
       protein: json["protein"].toString(),
       carbohydrate: json["carbohydrate"].toString(),
+      serving: json["serving"].toString(),
+      grams: json["grams"].toString(),
       image: "assets/images/${json["image"]}",
       quantity: "4");
 }

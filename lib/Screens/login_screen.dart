@@ -52,13 +52,33 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         LocalPreferences().setLoginBool(true);
         LocalPreferences().setUserName(ctlName.text.trim());
-        LocalPreferences().setUserHeight(ctlHeight.text.trim());
-        LocalPreferences().setUserWeight(ctlWeight.text.trim());
+        // LocalPreferences().setUserHeight(ctlHeight.text.trim());
+        // LocalPreferences().setUserWeight(ctlWeight.text.trim());
+
+        double weight = double.parse(ctlWeight.text.trim());
+
+        var requiredCal = "0", requiredProtein = "0", requiredCarbs = "0";
+
+        requiredProtein = (1.5 * weight).toStringAsFixed(2);
+
+        requiredCarbs = "280";
+
+        if (weight <= 60) {
+          requiredCal = "2500";
+        } else if (weight > 60 && weight <= 70) {
+          requiredCal = "2700";
+        } else {
+          requiredCal = "2900";
+        }
+
         UserOperations()
             .insertUser(
                 name: ctlName.text.trim(),
                 height: ctlHeight.text.trim(),
-                weight: ctlWeight.text.trim())
+                weight: ctlWeight.text.trim(),
+                requiredCal: requiredCal,
+                requiredProtein: requiredProtein,
+                requiredCarbs: requiredCarbs)
             .then((value) {
           setState(() {
             isLoading = false;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:track_it_up/Utils/common_functions.dart';
 
 import 'database_helper.dart';
 
@@ -13,12 +14,25 @@ class MealOperations {
     return queryRows;
   }
 
-  getAllMealByType(String type, String uId) async {
+  getAllMealByType(
+    String type,
+    String uId,
+  ) async {
     Database? db = await DatabaseHelper.instance.database;
 
     return await db!.rawQuery(
-        "SELECT * FROM ${DatabaseHelper.mealDBTableName} WHERE mealType=? and userId=?",
-        [type, uId]);
+        "SELECT * FROM ${DatabaseHelper.mealDBTableName} WHERE mealType=? and userId=? and createdOn=?",
+        [type, uId, CommonFunctions().returnAppDateFormat(DateTime.now())]);
+  }
+
+  getAllTodayMealData(
+    String uId,
+  ) async {
+    Database? db = await DatabaseHelper.instance.database;
+
+    return await db!.rawQuery(
+        "SELECT * FROM ${DatabaseHelper.mealDBTableName} WHERE  userId=? and createdOn=?",
+        [uId, CommonFunctions().returnAppDateFormat(DateTime.now())]);
   }
 
   insertingMeal({
@@ -32,6 +46,8 @@ class MealOperations {
     required String updatedAt,
     required String mealType,
     required String userId,
+    required String serving,
+    required String grams,
   }) async {
     int i = await DatabaseHelper.instance.insert({
       "prodId": prodId,
@@ -44,6 +60,8 @@ class MealOperations {
       "carbohydrate": carbohydrate,
       "createdOn": createdOn,
       "updatedAt": updatedAt,
+      "serving": serving,
+      "grams": grams,
     }, DatabaseHelper.mealDBTableName);
 
     debugPrint('the inserted id is $i');

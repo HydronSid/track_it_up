@@ -87,7 +87,7 @@ class ProductDetailScreen extends StatelessWidget {
                         bottom: 0,
                         right: 10,
                         child: Text(
-                          "Nutritional value\nper 1 grams",
+                          "Nutritional value\nper ${productModel.serving!}",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.nunito(
                               color: whiteColor, fontWeight: FontWeight.bold),
@@ -112,7 +112,9 @@ class ProductDetailScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Card(
+                        color: Colors.transparent,
                         shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: textColor),
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -128,14 +130,14 @@ class ProductDetailScreen extends StatelessWidget {
                                   Text(
                                     "Calories",
                                     style: GoogleFonts.nunito(
-                                        color: blackColor,
+                                        color: textColor,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "${productModel.calories!} g",
                                     style: GoogleFonts.nunito(
-                                        color: blackColor,
+                                        color: textColor,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -148,19 +150,19 @@ class ProductDetailScreen extends StatelessWidget {
                                 restartAnimation: false,
                                 animation: true,
                                 fillColor: Colors.transparent,
+                                progressColor:
+                                    const Color.fromARGB(255, 59, 82, 255),
+                                backgroundColor: whiteColor,
                                 animateFromLastPercent: true,
                                 animationDuration: 1000,
                                 width: size.width * 0.8,
                                 lineHeight: 10.0,
                                 percent:
                                     ((double.parse(productModel.calories!) /
-                                                300) *
+                                                320) *
                                             100) /
                                         100,
-                                backgroundColor: Colors.grey,
                                 barRadius: const Radius.circular(16),
-                                progressColor:
-                                    const Color.fromARGB(255, 59, 82, 255),
                               ),
                             ],
                           ),
@@ -172,6 +174,7 @@ class ProductDetailScreen extends StatelessWidget {
                       Card(
                         color: Colors.transparent,
                         shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: textColor),
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -207,18 +210,18 @@ class ProductDetailScreen extends StatelessWidget {
                                 restartAnimation: false,
                                 animation: true,
                                 fillColor: Colors.transparent,
+                                progressColor:
+                                    const Color.fromARGB(255, 59, 82, 255),
+                                backgroundColor: whiteColor,
                                 animateFromLastPercent: true,
                                 animationDuration: 1000,
                                 width: size.width * 0.8,
                                 lineHeight: 10.0,
                                 percent: ((double.parse(productModel.protein!) /
-                                            30) *
+                                            320) *
                                         100) /
                                     100,
-                                backgroundColor: whiteColor,
                                 barRadius: const Radius.circular(16),
-                                progressColor:
-                                    const Color.fromARGB(255, 59, 82, 255),
                               ),
                             ],
                           ),
@@ -228,7 +231,9 @@ class ProductDetailScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Card(
+                        color: Colors.transparent,
                         shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: textColor),
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -244,14 +249,14 @@ class ProductDetailScreen extends StatelessWidget {
                                   Text(
                                     "Carbohydrate",
                                     style: GoogleFonts.nunito(
-                                        color: blackColor,
+                                        color: whiteColor,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "${productModel.carbohydrate!} g",
                                     style: GoogleFonts.nunito(
-                                        color: blackColor,
+                                        color: whiteColor,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -264,19 +269,19 @@ class ProductDetailScreen extends StatelessWidget {
                                 restartAnimation: false,
                                 animation: true,
                                 fillColor: Colors.transparent,
+                                progressColor:
+                                    const Color.fromARGB(255, 59, 82, 255),
+                                backgroundColor: whiteColor,
                                 animateFromLastPercent: true,
                                 animationDuration: 1000,
                                 width: size.width * 0.8,
                                 lineHeight: 10.0,
                                 percent:
                                     ((double.parse(productModel.carbohydrate!) /
-                                                20) *
+                                                320) *
                                             100) /
                                         100,
-                                backgroundColor: Colors.grey,
                                 barRadius: const Radius.circular(16),
-                                progressColor:
-                                    const Color.fromARGB(255, 59, 82, 255),
                               ),
                             ],
                           ),

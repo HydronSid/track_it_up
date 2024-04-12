@@ -23,7 +23,9 @@ class ProductOperations {
     required String calories,
     required String protein,
     required String carbohydrate,
+    required String serving,
     required String image,
+    required String grams,
   }) async {
     int i = await DatabaseHelper.instance.insert({
       "prodId": prodId,
@@ -32,7 +34,9 @@ class ProductOperations {
       "calories": calories,
       "protein": protein,
       "carbohydrate": carbohydrate,
+      "serving": serving,
       "image": image,
+      "grams": grams,
     }, DatabaseHelper.productDBTableName);
 
     debugPrint('the inserted id is $i');

@@ -54,9 +54,14 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
                                 .getMealByTypeDateUser("BreakFast")),
                         builder: (context, snapshot) {
                           return EntryFormOneHelper(
-                              title: "BreakFast",
-                              productList: snapshot.data ?? [],
-                              state: snapshot.connectionState);
+                            totalCal: snapshot.data == null
+                                ? "0.0"
+                                : CommonFunctions()
+                                    .returnTotalMealCalories(snapshot.data!),
+                            title: "BreakFast",
+                            productList: snapshot.data ?? [],
+                            state: snapshot.connectionState,
+                          );
                         }),
                     const SizedBox(
                       height: 15,
@@ -67,9 +72,14 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
                                 .getMealByTypeDateUser("Lunch")),
                         builder: (context, snapshot) {
                           return EntryFormOneHelper(
-                              title: "Lunch",
-                              productList: snapshot.data ?? [],
-                              state: snapshot.connectionState);
+                            title: "Lunch",
+                            productList: snapshot.data ?? [],
+                            state: snapshot.connectionState,
+                            totalCal: snapshot.data == null
+                                ? "0.0"
+                                : CommonFunctions()
+                                    .returnTotalMealCalories(snapshot.data!),
+                          );
                         }),
                     const SizedBox(
                       height: 15,
@@ -80,6 +90,10 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
                                 .getMealByTypeDateUser("Dinner")),
                         builder: (context, snapshot) {
                           return EntryFormOneHelper(
+                              totalCal: snapshot.data == null
+                                  ? "0.0"
+                                  : CommonFunctions()
+                                      .returnTotalMealCalories(snapshot.data!),
                               title: "Dinner",
                               productList: snapshot.data ?? [],
                               state: snapshot.connectionState);
@@ -93,6 +107,10 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
                                 .getMealByTypeDateUser("Snacks")),
                         builder: (context, snapshot) {
                           return EntryFormOneHelper(
+                              totalCal: snapshot.data == null
+                                  ? "0.0"
+                                  : CommonFunctions()
+                                      .returnTotalMealCalories(snapshot.data!),
                               title: "Snacks",
                               productList: snapshot.data ?? [],
                               state: snapshot.connectionState);
@@ -112,7 +130,7 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
 }
 
 class EntryFormOneHelper extends StatefulWidget {
-  final String title;
+  final String title, totalCal;
   final List<MealModel> productList;
   final ConnectionState state;
 
@@ -120,7 +138,8 @@ class EntryFormOneHelper extends StatefulWidget {
       {super.key,
       required this.title,
       required this.productList,
-      required this.state});
+      required this.state,
+      required this.totalCal});
 
   @override
   State<EntryFormOneHelper> createState() => _EntryFormOneHelperState();
@@ -128,6 +147,14 @@ class EntryFormOneHelper extends StatefulWidget {
 
 class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
   String totalCalEaten = "";
+  double totCal = 0.0;
+
+  @override
+  void initState() {
+    totCal = 0.0;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -163,9 +190,7 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                               height: 10,
                             ),
                             Text(
-                              totalCalEaten.isEmpty
-                                  ? "0 Cal eaten"
-                                  : "$totalCalEaten Cal eaten",
+                              "${widget.totalCal} Cal eaten",
                               style: GoogleFonts.nunito(color: textColor),
                             ),
                           ],
@@ -195,7 +220,6 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             var product = widget.productList[index];
-                            double totCal = 0.0;
 
                             totCal += double.parse(product.totalCalories!);
 

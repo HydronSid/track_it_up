@@ -45,6 +45,8 @@ class DatabaseHelper {
     calories TEXT NOT NULL,  
     protein TEXT NOT NULL,
     carbohydrate TEXT NOT NULL,
+    serving TEXT NOT NULL,
+    grams TEXT NOT NULL,
     image TEXT NOT NULL
     );
   ''');
@@ -53,7 +55,10 @@ class DatabaseHelper {
     id INTEGER PRIMARY KEY,
     name VARCHAR,
     height TEXT NOT NULL, 
-    weight TEXT NOT NULL
+    weight TEXT NOT NULL,
+    requiredCal TEXT NOT NULL,
+    requiredProtein TEXT NOT NULL,
+    requiredCarbs TEXT NOT NULL
     );
   ''');
     await db.execute('''
@@ -68,6 +73,8 @@ class DatabaseHelper {
     createdOn TEXT NOT NULL,
     updatedAt TEXT NOT NULL,
     mealType TEXT NOT NULL,
+    serving TEXT NOT NULL,
+    grams TEXT NOT NULL,
     userId TEXT NOT NULL
     );
   ''');
