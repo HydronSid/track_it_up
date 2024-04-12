@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'database_helper.dart';
 
@@ -15,6 +16,13 @@ class UserOperations {
         await DatabaseHelper.instance.quaryAll(DatabaseHelper.userDBTableName);
 
     return queryRows;
+  }
+
+  getUserData(String checkKey, String value, String tableName) async {
+    Database? db = await DatabaseHelper.instance.database;
+    var data = await db!
+        .rawQuery('SELECT * FROM $tableName WHERE $checkKey = ?', [value]);
+    return data;
   }
 
   Future insertUser({

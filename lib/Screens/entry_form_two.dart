@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:track_it_up/Database/meal_operations.dart';
+import 'package:track_it_up/Models/user_model.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/common_functions.dart';
 
 import '../Models/product_model.dart';
 
 class EntryFormTwoCalulate extends StatefulWidget {
-  const EntryFormTwoCalulate({super.key});
+  final String mealType;
+  const EntryFormTwoCalulate({super.key, required this.mealType});
 
   @override
   State<EntryFormTwoCalulate> createState() => _EntryFormTwoCalulateState();
@@ -162,7 +165,7 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
                                   ),
                                 ),
                                 Text(
-                                  "3 Cal",
+                                  "${product.calories!} Cal",
                                   style: GoogleFonts.nunito(
                                       color: textColor,
                                       fontSize: 16,
@@ -172,9 +175,34 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                const Icon(
-                                  Icons.add,
-                                  color: whiteColor,
+                                InkWell(
+                                  onTap: () async {
+                                    UserModel userModel =
+                                        await CommonFunctions().getUser();
+
+                                    MealOperations().insertingMeal(
+                                        prodId: product.id!,
+                                        name: product.name!,
+                                        quantity: "1",
+                                        totalCalories: product.calories!,
+                                        createdOn: CommonFunctions()
+                                            .returnAppDateFormat(
+                                                DateTime.now()),
+                                        updatedAt: CommonFunctions()
+                                            .returnAppDateFormat(
+                                                DateTime.now()),
+                                        mealType: widget.mealType,
+                                        userId: userModel.id!,
+                                        protein: product.protein!,
+                                        carbohydrate: product.carbohydrate!);
+
+                                    CommonFunctions.showSuccessSnackbar(
+                                        "${product.name!} is added in todays's ${widget.mealType}");
+                                  },
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: whiteColor,
+                                  ),
                                 )
                               ],
                             ),

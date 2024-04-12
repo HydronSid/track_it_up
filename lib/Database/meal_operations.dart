@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'database_helper.dart';
 
 class MealOperations {
   List<Map<String, dynamic>> queryRows = [];
 
-  getAllMealByType(String type, String uId) async {
-    queryRows = await DatabaseHelper.instance
-        .quaryAllByType(DatabaseHelper.mealDBTableName, type, uId);
+  getAllMealData() async {
+    queryRows =
+        await DatabaseHelper.instance.quaryAll(DatabaseHelper.mealDBTableName);
 
     return queryRows;
+  }
+
+  getAllMealByType(String type, String uId) async {
+    Database? db = await DatabaseHelper.instance.database;
+
+    return await db!.rawQuery(
+        "SELECT * FROM ${DatabaseHelper.mealDBTableName} WHERE mealType=? and userId=?",
+        [type, uId]);
   }
 
   insertingMeal({
@@ -17,6 +26,8 @@ class MealOperations {
     required String name,
     required String quantity,
     required String totalCalories,
+    required String protein,
+    required String carbohydrate,
     required String createdOn,
     required String updatedAt,
     required String mealType,
@@ -29,9 +40,11 @@ class MealOperations {
       "totalCalories": totalCalories,
       "mealType": mealType,
       "userId": userId,
+      "protein": protein,
+      "carbohydrate": carbohydrate,
       "createdOn": createdOn,
       "updatedAt": updatedAt,
-    }, DatabaseHelper.productDBTableName);
+    }, DatabaseHelper.mealDBTableName);
 
     debugPrint('the inserted id is $i');
   }

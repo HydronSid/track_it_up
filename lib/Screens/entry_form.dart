@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:track_it_up/Models/product_model.dart';
+import 'package:track_it_up/Database/database_helper.dart';
+import 'package:track_it_up/Models/meal_model.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
+import 'package:track_it_up/Utils/common_functions.dart';
 
 import 'entry_form_two.dart';
 
@@ -13,60 +15,94 @@ class EntryFormCalulate extends StatefulWidget {
 }
 
 class _EntryFormCalulateState extends State<EntryFormCalulate> {
+  bool isLoading = false;
+  @override
+  void initState() {
+    //MealOperations().getAllMealData();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Enter what you have eaten so far.",
-              style: GoogleFonts.nunito(
-                  color: textColor, fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const EntryFormOneHelper(
-              title: "BreakFast",
-              totalCalEaten: "130",
-              productList: [],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const EntryFormOneHelper(
-              title: "Lunch",
-              totalCalEaten: "130",
-              productList: [],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const EntryFormOneHelper(
-              title: "Dinner",
-              totalCalEaten: "130",
-              productList: [],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const EntryFormOneHelper(
-              title: "Snacks",
-              totalCalEaten: "130",
-              productList: [],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-          ],
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Enter what you have eaten so far.",
+                style: GoogleFonts.nunito(
+                    color: textColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              StreamBuilder(
+                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
+                      (_) =>
+                          CommonFunctions().getMealByTypeDateUser("BreakFast")),
+                  builder: (context, snapshot) {
+                    return EntryFormOneHelper(
+                      title: "BreakFast",
+                      totalCalEaten: "130",
+                      productList: snapshot.data ?? [],
+                    );
+                  }),
+              const SizedBox(
+                height: 15,
+              ),
+              StreamBuilder(
+                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
+                      (_) => CommonFunctions().getMealByTypeDateUser("Lunch")),
+                  builder: (context, snapshot) {
+                    return EntryFormOneHelper(
+                      title: "Lunch",
+                      totalCalEaten: "130",
+                      productList: snapshot.data ?? [],
+                    );
+                  }),
+              const SizedBox(
+                height: 15,
+              ),
+              StreamBuilder(
+                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
+                      (_) => CommonFunctions().getMealByTypeDateUser("Dinner")),
+                  builder: (context, snapshot) {
+                    return EntryFormOneHelper(
+                      title: "Dinner",
+                      totalCalEaten: "130",
+                      productList: snapshot.data ?? [],
+                    );
+                  }),
+              const SizedBox(
+                height: 15,
+              ),
+              StreamBuilder(
+                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
+                      (_) => CommonFunctions().getMealByTypeDateUser("Snacks")),
+                  builder: (context, snapshot) {
+                    return EntryFormOneHelper(
+                      title: "Snacks",
+                      totalCalEaten: "130",
+                      productList: snapshot.data ?? [],
+                    );
+                  }),
+              const SizedBox(
+                height: 15,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -75,7 +111,7 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
 
 class EntryFormOneHelper extends StatelessWidget {
   final String title, totalCalEaten;
-  final List<ProductModel> productList;
+  final List<MealModel> productList;
 
   const EntryFormOneHelper(
       {super.key,
@@ -101,8 +137,9 @@ class EntryFormOneHelper extends StatelessWidget {
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const EntryFormTwoCalulate())),
+                            builder: (context) => EntryFormTwoCalulate(
+                                  mealType: title,
+                                ))),
                     child: Row(
                       children: [
                         Column(
@@ -149,24 +186,31 @@ class EntryFormOneHelper extends StatelessWidget {
                                   style: GoogleFonts.nunito(color: textColor),
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 Text(
-                                  product.quantity!,
+                                  "${product.quantity!} g",
                                   style: GoogleFonts.nunito(color: textColor),
                                 ),
                               ],
                             ),
                             const Spacer(),
                             Text(
-                              "1 Cal",
+                              "${product.totalCalories!} Cal",
                               style: GoogleFonts.nunito(color: textColor),
                             ),
                             const SizedBox(
                               width: 10,
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                DatabaseHelper.instance.deleteRecordFromTable(
+                                    product.id!,
+                                    DatabaseHelper.mealDBTableName);
+
+                                CommonFunctions.showSuccessSnackbar(
+                                    "${product.name!} is removed from todays's $title");
+                              },
                               child: const Icon(
                                 Icons.close,
                                 color: whiteColor,
@@ -176,8 +220,8 @@ class EntryFormOneHelper extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 10,
+                        return const Divider(
+                          color: whiteColor,
                         );
                       },
                       itemCount: productList.length)

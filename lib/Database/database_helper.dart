@@ -61,8 +61,9 @@ class DatabaseHelper {
     id INTEGER PRIMARY KEY,
     prodId TEXT NOT NULL,
     name TEXT NOT NULL,
-    carbohydrate TEXT NOT NULL,
     quantity TEXT NOT NULL,
+    protein TEXT NOT NULL,
+    carbohydrate TEXT NOT NULL,
     totalCalories TEXT NOT NULL,
     createdOn TEXT NOT NULL,
     updatedAt TEXT NOT NULL,
@@ -108,12 +109,6 @@ class DatabaseHelper {
     return await db!.update(tableName, row, where: 'id = ?', whereArgs: [id]);
   }
 
-  // sumFinalProductTotal() async {
-  //   Database? db = await database;
-  //   var data = await db!.rawQuery("SELECT SUM($total) FROM $_cartDBTableName");
-  //   return data;
-  // }
-
   Future<void> truncateTableIfExists(String tableName) async {
     Database? db = await instance.database;
     final tableExist = await tableExists(tableName);
@@ -128,13 +123,5 @@ class DatabaseHelper {
       "SELECT name FROM sqlite_master WHERE type='table' AND name='$tableName'",
     );
     return result.isNotEmpty;
-  }
-
-  Future<List<Map<String, dynamic>>> quaryAllByType(
-      String tableName, String type, String uId) async {
-    Database? db = await instance.database;
-
-    return await db!
-        .rawQuery("SELECT * $tableName WHERE type=$type AND userId=$uId");
   }
 }
