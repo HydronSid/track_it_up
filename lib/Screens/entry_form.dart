@@ -29,96 +29,105 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
     return Scaffold(
       backgroundColor: bgColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 20,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Enter what you have eaten so far.",
+              style: GoogleFonts.nunito(
+                  color: textColor, fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    StreamBuilder(
+                        stream: Stream.periodic(const Duration(seconds: 1))
+                            .asyncMap((_) => CommonFunctions()
+                                .getMealByTypeDateUser("BreakFast")),
+                        builder: (context, snapshot) {
+                          return EntryFormOneHelper(
+                              title: "BreakFast",
+                              productList: snapshot.data ?? [],
+                              state: snapshot.connectionState);
+                        }),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    StreamBuilder(
+                        stream: Stream.periodic(const Duration(seconds: 1))
+                            .asyncMap((_) => CommonFunctions()
+                                .getMealByTypeDateUser("Lunch")),
+                        builder: (context, snapshot) {
+                          return EntryFormOneHelper(
+                              title: "Lunch",
+                              productList: snapshot.data ?? [],
+                              state: snapshot.connectionState);
+                        }),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    StreamBuilder(
+                        stream: Stream.periodic(const Duration(seconds: 1))
+                            .asyncMap((_) => CommonFunctions()
+                                .getMealByTypeDateUser("Dinner")),
+                        builder: (context, snapshot) {
+                          return EntryFormOneHelper(
+                              title: "Dinner",
+                              productList: snapshot.data ?? [],
+                              state: snapshot.connectionState);
+                        }),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    StreamBuilder(
+                        stream: Stream.periodic(const Duration(seconds: 1))
+                            .asyncMap((_) => CommonFunctions()
+                                .getMealByTypeDateUser("Snacks")),
+                        builder: (context, snapshot) {
+                          return EntryFormOneHelper(
+                              title: "Snacks",
+                              productList: snapshot.data ?? [],
+                              state: snapshot.connectionState);
+                        }),
+                  ],
+                ),
               ),
-              Text(
-                "Enter what you have eaten so far.",
-                style: GoogleFonts.nunito(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              StreamBuilder(
-                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
-                      (_) =>
-                          CommonFunctions().getMealByTypeDateUser("BreakFast")),
-                  builder: (context, snapshot) {
-                    return EntryFormOneHelper(
-                      title: "BreakFast",
-                      totalCalEaten: "130",
-                      productList: snapshot.data ?? [],
-                    );
-                  }),
-              const SizedBox(
-                height: 15,
-              ),
-              StreamBuilder(
-                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
-                      (_) => CommonFunctions().getMealByTypeDateUser("Lunch")),
-                  builder: (context, snapshot) {
-                    return EntryFormOneHelper(
-                      title: "Lunch",
-                      totalCalEaten: "130",
-                      productList: snapshot.data ?? [],
-                    );
-                  }),
-              const SizedBox(
-                height: 15,
-              ),
-              StreamBuilder(
-                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
-                      (_) => CommonFunctions().getMealByTypeDateUser("Dinner")),
-                  builder: (context, snapshot) {
-                    return EntryFormOneHelper(
-                      title: "Dinner",
-                      totalCalEaten: "130",
-                      productList: snapshot.data ?? [],
-                    );
-                  }),
-              const SizedBox(
-                height: 15,
-              ),
-              StreamBuilder(
-                  stream: Stream.periodic(const Duration(seconds: 1)).asyncMap(
-                      (_) => CommonFunctions().getMealByTypeDateUser("Snacks")),
-                  builder: (context, snapshot) {
-                    return EntryFormOneHelper(
-                      title: "Snacks",
-                      totalCalEaten: "130",
-                      productList: snapshot.data ?? [],
-                    );
-                  }),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class EntryFormOneHelper extends StatelessWidget {
-  final String title, totalCalEaten;
+class EntryFormOneHelper extends StatefulWidget {
+  final String title;
   final List<MealModel> productList;
+  final ConnectionState state;
 
   const EntryFormOneHelper(
       {super.key,
       required this.title,
-      required this.totalCalEaten,
-      required this.productList});
+      required this.productList,
+      required this.state});
 
+  @override
+  State<EntryFormOneHelper> createState() => _EntryFormOneHelperState();
+}
+
+class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
+  String totalCalEaten = "";
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -138,7 +147,7 @@ class EntryFormOneHelper extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => EntryFormTwoCalulate(
-                                  mealType: title,
+                                  mealType: widget.title,
                                 ))),
                     child: Row(
                       children: [
@@ -147,14 +156,16 @@ class EntryFormOneHelper extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              title,
+                              widget.title,
                               style: GoogleFonts.nunito(color: textColor),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             Text(
-                              totalCalEaten,
+                              totalCalEaten.isEmpty
+                                  ? "0 Cal eaten"
+                                  : "$totalCalEaten Cal eaten",
                               style: GoogleFonts.nunito(color: textColor),
                             ),
                           ],
@@ -170,61 +181,77 @@ class EntryFormOneHelper extends StatelessWidget {
                   const Divider(
                     color: whiteColor,
                   ),
-                  ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var product = productList[index];
-                        return Row(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  widget.state == ConnectionState.waiting
+                      ? Container(
+                          height: 15,
+                          width: 15,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: const CircularProgressIndicator(
+                            color: textColor,
+                          ),
+                        )
+                      : ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            var product = widget.productList[index];
+                            double totCal = 0.0;
+
+                            totCal += double.parse(product.totalCalories!);
+
+                            totalCalEaten = totCal.toStringAsFixed(2);
+                            return Row(
                               children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      product.name!,
+                                      style:
+                                          GoogleFonts.nunito(color: textColor),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "${product.quantity!} g",
+                                      style:
+                                          GoogleFonts.nunito(color: textColor),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
                                 Text(
-                                  product.name!,
+                                  "${product.totalCalories!} Cal",
                                   style: GoogleFonts.nunito(color: textColor),
                                 ),
                                 const SizedBox(
-                                  height: 5,
+                                  width: 10,
                                 ),
-                                Text(
-                                  "${product.quantity!} g",
-                                  style: GoogleFonts.nunito(color: textColor),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Text(
-                              "${product.totalCalories!} Cal",
-                              style: GoogleFonts.nunito(color: textColor),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                DatabaseHelper.instance.deleteRecordFromTable(
-                                    product.id!,
-                                    DatabaseHelper.mealDBTableName);
+                                InkWell(
+                                  onTap: () {
+                                    DatabaseHelper.instance
+                                        .deleteRecordFromTable(product.id!,
+                                            DatabaseHelper.mealDBTableName);
 
-                                CommonFunctions.showSuccessSnackbar(
-                                    "${product.name!} is removed from todays's $title");
-                              },
-                              child: const Icon(
-                                Icons.close,
-                                color: whiteColor,
-                              ),
-                            )
-                          ],
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Divider(
-                          color: whiteColor,
-                        );
-                      },
-                      itemCount: productList.length)
+                                    CommonFunctions.showSuccessSnackbar(
+                                        "${product.name!} is removed from todays's ${widget.title}");
+                                  },
+                                  child: const Icon(
+                                    Icons.close,
+                                    color: whiteColor,
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider(
+                              color: whiteColor,
+                            );
+                          },
+                          itemCount: widget.productList.length)
                 ],
               ))
         ],

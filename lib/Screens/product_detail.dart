@@ -6,7 +6,9 @@ import 'package:track_it_up/Utils/appcolors.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final ProductModel productModel;
-  const ProductDetailScreen({super.key, required this.productModel});
+  final String action;
+  const ProductDetailScreen(
+      {super.key, required this.productModel, required this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +87,7 @@ class ProductDetailScreen extends StatelessWidget {
                         bottom: 0,
                         right: 10,
                         child: Text(
-                          "Nutritional value\nper 50 grams",
+                          "Nutritional value\nper 1 grams",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.nunito(
                               color: whiteColor, fontWeight: FontWeight.bold),
@@ -114,64 +116,7 @@ class ProductDetailScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Protein",
-                                    style: GoogleFonts.nunito(
-                                        color: blackColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "${productModel.protein!} gms",
-                                    style: GoogleFonts.nunito(
-                                        color: blackColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              LinearPercentIndicator(
-                                restartAnimation: false,
-                                animation: true,
-                                fillColor: Colors.transparent,
-                                animateFromLastPercent: true,
-                                animationDuration: 1000,
-                                width: size.width * 0.8,
-                                lineHeight: 10.0,
-                                percent: ((double.parse(productModel.protein!) /
-                                            30) *
-                                        100) /
-                                    100,
-                                backgroundColor: Colors.grey,
-                                barRadius: const Radius.circular(16),
-                                progressColor:
-                                    const Color.fromARGB(255, 59, 82, 255),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 10),
+                              horizontal: 10.0, vertical: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,7 +133,7 @@ class ProductDetailScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "${productModel.calories!} gms",
+                                    "${productModel.calories!} g",
                                     style: GoogleFonts.nunito(
                                         color: blackColor,
                                         fontSize: 15,
@@ -225,11 +170,69 @@ class ProductDetailScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Card(
+                        color: Colors.transparent,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 10),
+                              horizontal: 10.0, vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Protein",
+                                    style: GoogleFonts.nunito(
+                                        color: whiteColor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "${productModel.protein!} g",
+                                    style: GoogleFonts.nunito(
+                                        color: whiteColor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              LinearPercentIndicator(
+                                restartAnimation: false,
+                                animation: true,
+                                fillColor: Colors.transparent,
+                                animateFromLastPercent: true,
+                                animationDuration: 1000,
+                                width: size.width * 0.8,
+                                lineHeight: 10.0,
+                                percent: ((double.parse(productModel.protein!) /
+                                            30) *
+                                        100) /
+                                    100,
+                                backgroundColor: whiteColor,
+                                barRadius: const Radius.circular(16),
+                                progressColor:
+                                    const Color.fromARGB(255, 59, 82, 255),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,7 +249,7 @@ class ProductDetailScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "${productModel.carbohydrate!} gms",
+                                    "${productModel.carbohydrate!} g",
                                     style: GoogleFonts.nunito(
                                         color: blackColor,
                                         fontSize: 15,
@@ -288,33 +291,30 @@ class ProductDetailScreen extends StatelessWidget {
               ],
             )),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-                width: size.width * 0.6,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12))),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.add,
-                          color: whiteColor,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Add Food",
-                          style: GoogleFonts.nunito(
-                              color: whiteColor, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ))),
-          )
+          SizedBox(
+              width: size.width * 0.6,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12))),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.add,
+                        color: whiteColor,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Add Food",
+                        style: GoogleFonts.nunito(
+                            color: whiteColor, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  )))
         ],
       ),
     );

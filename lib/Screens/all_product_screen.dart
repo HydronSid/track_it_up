@@ -153,6 +153,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => ProductDetailScreen(
                                           productModel: product,
+                                          action: "view",
                                         )));
                           },
                           child: Column(

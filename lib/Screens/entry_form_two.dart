@@ -6,6 +6,7 @@ import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/common_functions.dart';
 
 import '../Models/product_model.dart';
+import 'product_detail.dart';
 
 class EntryFormTwoCalulate extends StatefulWidget {
   final String mealType;
@@ -133,78 +134,89 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
                     child: ListView.separated(
                         itemBuilder: (context, index) {
                           var product = searchResultList[index];
-                          return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        product.name!,
-                                        style: GoogleFonts.nunito(
-                                            color: textColor,
-                                            fontSize: 16,
-                                            letterSpacing: 0.5,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "1 g",
-                                        style: GoogleFonts.nunito(
-                                            color: textColor,
-                                            fontSize: 14,
-                                            letterSpacing: 0.5,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
+                          return InkWell(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetailScreen(
+                                          productModel: product,
+                                          action: "add",
+                                        ))),
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          product.name!,
+                                          style: GoogleFonts.nunito(
+                                              color: textColor,
+                                              fontSize: 16,
+                                              letterSpacing: 0.5,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          "1 g",
+                                          style: GoogleFonts.nunito(
+                                              color: textColor,
+                                              fontSize: 14,
+                                              letterSpacing: 0.5,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "${product.calories!} Cal",
-                                  style: GoogleFonts.nunito(
-                                      color: textColor,
-                                      fontSize: 16,
-                                      letterSpacing: 0.5,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    UserModel userModel =
-                                        await CommonFunctions().getUser();
-
-                                    MealOperations().insertingMeal(
-                                        prodId: product.id!,
-                                        name: product.name!,
-                                        quantity: "1",
-                                        totalCalories: product.calories!,
-                                        createdOn: CommonFunctions()
-                                            .returnAppDateFormat(
-                                                DateTime.now()),
-                                        updatedAt: CommonFunctions()
-                                            .returnAppDateFormat(
-                                                DateTime.now()),
-                                        mealType: widget.mealType,
-                                        userId: userModel.id!,
-                                        protein: product.protein!,
-                                        carbohydrate: product.carbohydrate!);
-
-                                    CommonFunctions.showSuccessSnackbar(
-                                        "${product.name!} is added in todays's ${widget.mealType}");
-                                  },
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: whiteColor,
+                                  Text(
+                                    "${product.calories!} Cal",
+                                    style: GoogleFonts.nunito(
+                                        color: textColor,
+                                        fontSize: 16,
+                                        letterSpacing: 0.5,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                )
-                              ],
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  InkWell(
+                                    onTap: () async {
+                                      UserModel userModel =
+                                          await CommonFunctions().getUser();
+
+                                      MealOperations().insertingMeal(
+                                          prodId: product.id!,
+                                          name: product.name!,
+                                          quantity: "1",
+                                          totalCalories: product.calories!,
+                                          createdOn: CommonFunctions()
+                                              .returnAppDateFormat(
+                                                  DateTime.now()),
+                                          updatedAt: CommonFunctions()
+                                              .returnAppDateFormat(
+                                                  DateTime.now()),
+                                          mealType: widget.mealType,
+                                          userId: userModel.id!,
+                                          protein: product.protein!,
+                                          carbohydrate: product.carbohydrate!);
+
+                                      CommonFunctions.showSuccessSnackbar(
+                                          "${product.name!} is added in todays's ${widget.mealType}");
+                                    },
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: whiteColor,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         },
