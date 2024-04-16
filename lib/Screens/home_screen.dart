@@ -384,8 +384,11 @@ class TrackerWidget extends StatelessWidget {
                 lineWidth: 10.0,
                 percent: goal == "0"
                     ? 0.0
-                    : ((double.parse(consumed) / double.parse(goal)) * 100) /
-                        100,
+                    : double.parse(consumed) > double.parse(goal)
+                        ? 1.0
+                        : ((double.parse(consumed) / double.parse(goal)) *
+                                100) /
+                            100,
                 center: Text(
                   "$remaining\nRemaining",
                   textAlign: TextAlign.center,

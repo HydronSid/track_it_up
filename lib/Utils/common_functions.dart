@@ -117,10 +117,21 @@ class CommonFunctions {
       consumedCarbs += double.parse(element.carbohydrate!);
     }
 
-    if (mealList.isNotEmpty) {
-      remainingCal = double.parse(user.requiredCal!) - consumedCarbs;
+    if (consumedCal > double.parse(user.requiredCal!)) {
+      remainingCal = 0.0;
+    } else {
+      remainingCal = double.parse(user.requiredCal!) - consumedCal;
+    }
+    if (consumedProtein > double.parse(user.requiredProtein!)) {
+      remainingProtein = 0.0;
+    } else {
       remainingProtein = double.parse(user.requiredProtein!) - consumedProtein;
-      remainingCarbs = double.parse(user.requiredProtein!) - consumedCarbs;
+    }
+
+    if (consumedCarbs > double.parse(user.requiredCarbs!)) {
+      remainingCarbs = 0.0;
+    } else {
+      remainingCarbs = double.parse(user.requiredCarbs!) - consumedCarbs;
     }
 
     return [
