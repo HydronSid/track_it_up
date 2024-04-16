@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   dynamic uptoDate;
   List _allDate = [];
 
-  List helper = [];
+  // List helper = [];
   UserModel userModel = UserModel();
 
   @override
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   initData() async {
     userModel = await CommonFunctions().getUser();
 
-    helper = await CommonFunctions().getAllTodayMealData();
+    //  helper = await CommonFunctions().getAllTodayMealData();
 
     userName = userModel.name!;
     selectedDate = 0;
@@ -210,40 +210,64 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      TrackerWidget(
-                        title: "Calories",
-                        consumed:
-                            helper.isEmpty ? "0" : helper[0].toStringAsFixed(2),
-                        remaining:
-                            helper.isEmpty ? "0" : helper[3].toStringAsFixed(2),
-                        goal: userModel.requiredCal ?? "0",
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TrackerWidget(
-                        title: "Protein",
-                        consumed:
-                            helper.isEmpty ? "0" : helper[1].toStringAsFixed(2),
-                        remaining:
-                            helper.isEmpty ? "0" : helper[4].toStringAsFixed(2),
-                        goal: userModel.requiredProtein ?? "0",
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TrackerWidget(
-                        title: "Carbs",
-                        consumed:
-                            helper.isEmpty ? "0" : helper[2].toStringAsFixed(2),
-                        remaining:
-                            helper.isEmpty ? "0" : helper[5].toStringAsFixed(2),
-                        goal: userModel.requiredCarbs ?? "0",
-                      ),
-                    ],
-                  ),
+                  child: StreamBuilder(
+                      stream: Stream.periodic(const Duration(seconds: 1))
+                          .asyncMap(
+                              (_) => CommonFunctions().getAllTodayMealData()),
+                      builder: (context, snapshot) {
+                        return snapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? Column(
+                                children: const [
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Center(
+                                      child: CircularProgressIndicator(
+                                          color: whiteColor)),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  TrackerWidget(
+                                    title: "Calories",
+                                    consumed: snapshot.data.isEmpty
+                                        ? "0"
+                                        : snapshot.data[0].toStringAsFixed(2),
+                                    remaining: snapshot.data.isEmpty
+                                        ? "0"
+                                        : snapshot.data[3].toStringAsFixed(2),
+                                    goal: userModel.requiredCal ?? "0",
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TrackerWidget(
+                                    title: "Protein",
+                                    consumed: snapshot.data.isEmpty
+                                        ? "0"
+                                        : snapshot.data[1].toStringAsFixed(2),
+                                    remaining: snapshot.data.isEmpty
+                                        ? "0"
+                                        : snapshot.data[4].toStringAsFixed(2),
+                                    goal: userModel.requiredProtein ?? "0",
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TrackerWidget(
+                                    title: "Carbs",
+                                    consumed: snapshot.data.isEmpty
+                                        ? "0"
+                                        : snapshot.data[2].toStringAsFixed(2),
+                                    remaining: snapshot.data.isEmpty
+                                        ? "0"
+                                        : snapshot.data[5].toStringAsFixed(2),
+                                    goal: userModel.requiredCarbs ?? "0",
+                                  ),
+                                ],
+                              );
+                      }),
                 ),
               )
             ],

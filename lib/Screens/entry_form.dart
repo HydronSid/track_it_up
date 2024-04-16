@@ -223,6 +223,12 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
 
                             totCal += double.parse(product.totalCalories!);
 
+                            var qnt = product.quantity!.split(" ");
+                            double divideVal = 0.0;
+
+                            divideVal = double.parse(product.totalCalories!) /
+                                double.parse(qnt[0]);
+
                             totalCalEaten = totCal.toStringAsFixed(2);
                             return Row(
                               children: [
@@ -239,7 +245,7 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${product.quantity!} g",
+                                      "${divideVal.toStringAsFixed(2)} Cal x ${product.quantity!}",
                                       style:
                                           GoogleFonts.nunito(color: textColor),
                                     ),

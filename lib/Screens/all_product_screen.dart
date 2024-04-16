@@ -152,6 +152,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ProductDetailScreen(
+                                          mealType: "",
                                           productModel: product,
                                           action: "view",
                                         )));

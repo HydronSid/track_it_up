@@ -141,6 +141,7 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
                                     builder: (context) => ProductDetailScreen(
                                           productModel: product,
                                           action: "add",
+                                          mealType: widget.mealType,
                                         ))),
                             child: Container(
                               padding:
