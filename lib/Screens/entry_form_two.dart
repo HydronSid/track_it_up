@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:track_it_up/Database/meal_operations.dart';
-import 'package:track_it_up/Models/user_model.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 import 'package:track_it_up/Utils/common_functions.dart';
 
@@ -187,37 +185,37 @@ class _EntryFormTwoCalulateState extends State<EntryFormTwoCalulate> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  InkWell(
-                                    onTap: () async {
-                                      UserModel userModel =
-                                          await CommonFunctions().getUser();
+                                  // InkWell(
+                                  //   onTap: () async {
+                                  //     UserModel userModel =
+                                  //         await CommonFunctions().getUser();
 
-                                      MealOperations().insertingMeal(
-                                          prodId: product.id!,
-                                          name: product.name!,
-                                          quantity: "1",
-                                          totalCalories: product.calories!,
-                                          createdOn: CommonFunctions()
-                                              .returnAppDateFormat(
-                                                  DateTime.now()),
-                                          updatedAt: CommonFunctions()
-                                              .returnAppDateFormat(
-                                                  DateTime.now()),
-                                          mealType: widget.mealType,
-                                          userId: userModel.id!,
-                                          protein: product.protein!,
-                                          carbohydrate: product.carbohydrate!,
-                                          serving: product.serving!,
-                                          grams: product.grams!);
+                                  //     MealOperations().insertingMeal(
+                                  //         prodId: product.id!,
+                                  //         name: product.name!,
+                                  //         quantity: "1",
+                                  //         totalCalories: product.calories!,
+                                  //         createdOn: CommonFunctions()
+                                  //             .returnAppDateFormat(
+                                  //                 DateTime.now()),
+                                  //         updatedAt: CommonFunctions()
+                                  //             .returnAppDateFormat(
+                                  //                 DateTime.now()),
+                                  //         mealType: widget.mealType,
+                                  //         userId: userModel.id!,
+                                  //         protein: product.protein!,
+                                  //         carbohydrate: product.carbohydrate!,
+                                  //         serving: product.serving!,
+                                  //         grams: product.grams!);
 
-                                      CommonFunctions.showSuccessSnackbar(
-                                          "${product.name!} is added in todays's ${widget.mealType}");
-                                    },
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: whiteColor,
-                                    ),
-                                  )
+                                  //     CommonFunctions.showSuccessSnackbar(
+                                  //         "${product.name!} is added in todays's ${widget.mealType}");
+                                  //   },
+                                  //   child: const Icon(
+                                  //     Icons.add,
+                                  //     color: whiteColor,
+                                  //   ),
+                                  // )
                                 ],
                               ),
                             ),

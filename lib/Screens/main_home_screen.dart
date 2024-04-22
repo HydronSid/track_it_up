@@ -7,6 +7,7 @@ import 'package:track_it_up/Screens/home_screen.dart';
 import 'package:track_it_up/Utils/appcolors.dart';
 
 import 'all_product_screen.dart';
+import 'all_recipe_screen.dart';
 import 'navigation_bar_controller.dart';
 
 class MainHomeScreen extends StatefulWidget {
@@ -25,8 +26,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     const AllProductScreen(
       isAppBar: false,
     ),
-    Container(),
-    Container(),
+    const AllRecipeScreen(),
+    //Container(),
   ];
 
   int _selectedTab = 0;
@@ -108,8 +109,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                   icon: Icon(Icons.search), label: "Search"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.fastfood_outlined), label: "Recipes"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.history), label: "History"),
+              // BottomNavigationBarItem(
+              //     icon: Icon(Icons.history), label: "History"),
             ],
           ),
         ));
