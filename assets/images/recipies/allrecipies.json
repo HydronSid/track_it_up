@@ -1,0 +1,243 @@
+[
+    {
+        "recipeId":"0",
+        "name":"Butter chicken",
+        "image":"butter_chicken.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"1",
+        "name":"Paneer butter masal",
+        "image":"paneer_butter_masal.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"2",
+        "name":"Avocado toast",
+        "image":"avocado_toast.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"3",
+        "name":"Paneer pulao",
+        "image":"paneer_pulao.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"4",
+        "name":"Mutton biryani",
+        "image":"mutton_biryani.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"5",
+        "name":"Chicken biryani",
+        "image":"chicken_biryani.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"6",
+        "name":"Chicken fried rice",
+        "image":"chicken_fried_rice.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"7",
+        "name":"Veg fried rice",
+        "image":"veg_fried_rice.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"8",
+        "name":"Egg bhurji",
+        "image":"egg_bhurji.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"9",
+        "name":"Paneer bhurji",
+        "image":"paneer_bhurji.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"10",
+        "name":"Vegetable sandwich",
+        "image":"vegetable_sandwich.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"11",
+        "name":"Chicken mayo sandwich",
+        "image":"chicken_mayo_sandwich.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"12",
+        "name":"Dosa",
+        "image":"dosa.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"13",
+        "name":"Idli",
+        "image":"idli.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"14",
+        "name":"Omelet sandwich",
+        "image":"omelet_sandwich.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    },
+    {
+        "recipeId":"15",
+        "name":"Egg sandwich",
+        "image":"egg_sandwich.jpg",
+        "ingredients": [
+            "ingredientsOne",
+            "ingredientsTwo",
+            "ingredientsThree"
+        ],
+        "description": [
+            "DescriptionOne",
+            "DescriptionTwo",
+            "DescriptionThree"
+        ]    
+    }
+
+]
