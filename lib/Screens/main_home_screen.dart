@@ -93,22 +93,22 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
         child: Scaffold(
           body: items[_selectedTab],
           bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: bgColor,
+            backgroundColor: accentColor,
             elevation: 0,
             currentIndex: _selectedTab,
             type: BottomNavigationBarType.fixed,
             selectedLabelStyle: GoogleFonts.nunito(fontSize: 12),
             unselectedLabelStyle: GoogleFonts.nunito(fontSize: 12),
             onTap: (index) => _changeTab(index),
-            selectedItemColor: textColor,
-            unselectedItemColor: Colors.grey,
+            selectedItemColor: whiteColor,
+            unselectedItemColor: const Color.fromARGB(255, 207, 207, 207),
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.home), label: "Dashboard"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.search), label: "Search"),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.fastfood_outlined), label: "Recipes"),
+                  icon: Icon(Icons.fastfood_outlined), label: "Food Options"),
               // BottomNavigationBarItem(
               //     icon: Icon(Icons.history), label: "History"),
             ],

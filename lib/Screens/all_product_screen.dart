@@ -75,11 +75,12 @@ class _AllProductScreenState extends State<AllProductScreen> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          iconTheme: const IconThemeData(color: whiteColor),
+          iconTheme: const IconThemeData(color: blackColor),
           centerTitle: true,
           title: Text(
             "Foods",
-            style: GoogleFonts.nunito(color: whiteColor),
+            style: GoogleFonts.nunito(
+                color: accentColor, fontWeight: FontWeight.bold),
           ),
           automaticallyImplyLeading: widget.isAppBar,
         ),
@@ -94,23 +95,22 @@ class _AllProductScreenState extends State<AllProductScreen> {
                 onChanged: (value) {},
                 decoration: InputDecoration(
                   hintText: 'Search Foods...',
-                  hintStyle: GoogleFonts.nunito(color: whiteColor),
+                  hintStyle: GoogleFonts.nunito(color: blackColor),
                   prefixIcon: const Icon(
                     Icons.search,
-                    color: whiteColor,
+                    color: accentColor,
                   ),
                   contentPadding: EdgeInsets.zero,
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 144, 142, 142))),
+                      borderSide: const BorderSide(color: blackColor)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide:
-                          const BorderSide(color: whiteColor, width: 1)),
+                          const BorderSide(color: accentColor, width: 1)),
                   focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: whiteColor)),
+                      borderSide: const BorderSide(color: blackColor)),
                   errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: Colors.red)),

@@ -75,13 +75,16 @@ class RecipeDetailScreen extends StatelessWidget {
                     Text(
                       recipeModel.name!,
                       style: GoogleFonts.nunito(
-                          color: whiteColor, fontSize: 20, letterSpacing: 1.5),
+                          color: accentColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          letterSpacing: 1.5),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     const Divider(
-                      color: whiteColor,
+                      color: blackColor,
                     ),
                     const SizedBox(
                       height: 10,
@@ -89,7 +92,10 @@ class RecipeDetailScreen extends StatelessWidget {
                     Text(
                       "Ingredients",
                       style: GoogleFonts.nunito(
-                          color: whiteColor, fontSize: 20, letterSpacing: 1.5),
+                          color: blackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          letterSpacing: 1.5),
                     ),
                     ListView.separated(
                         shrinkWrap: true,
@@ -97,10 +103,11 @@ class RecipeDetailScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var data = recipeModel.ingredients![index];
                           return Text(
-                            data,
+                            "${index + 1}) $data",
                             style: GoogleFonts.nunito(
-                                color: whiteColor,
-                                fontSize: 15,
+                                color: blackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
                                 letterSpacing: 1.5),
                           );
                         },
@@ -114,7 +121,7 @@ class RecipeDetailScreen extends StatelessWidget {
                       height: 10,
                     ),
                     const Divider(
-                      color: whiteColor,
+                      color: blackColor,
                     ),
                     const SizedBox(
                       height: 10,
@@ -122,18 +129,27 @@ class RecipeDetailScreen extends StatelessWidget {
                     Text(
                       "Description",
                       style: GoogleFonts.nunito(
-                          color: whiteColor, fontSize: 20, letterSpacing: 1.5),
+                          color: blackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          letterSpacing: 1.5),
                     ),
                     ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           var data = recipeModel.description![index];
+                          String head = index == 0
+                              ? "P       "
+                              : index == 1
+                                  ? "Cal    "
+                                  : "Carbs";
                           return Text(
-                            data,
+                            "$head : $data",
                             style: GoogleFonts.nunito(
-                                color: whiteColor,
-                                fontSize: 15,
+                                color: blackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
                                 letterSpacing: 1.5),
                           );
                         },

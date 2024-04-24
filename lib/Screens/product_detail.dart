@@ -128,7 +128,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             "Nutritional value\nper ${widget.productModel.serving!}",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.nunito(
-                                color: whiteColor, fontWeight: FontWeight.bold),
+                                color: blackColor, fontWeight: FontWeight.bold),
                           ))
                     ],
                   ),
@@ -142,17 +142,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         Text(
                           widget.productModel.name!,
                           style: GoogleFonts.nunito(
-                              color: whiteColor,
+                              color: accentColor,
                               fontSize: 20,
+                              fontWeight: FontWeight.bold,
                               letterSpacing: 1.5),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Card(
-                          color: Colors.transparent,
+                          color: whiteColor,
+                          elevation: 3,
                           shape: RoundedRectangleBorder(
-                              side: const BorderSide(color: textColor),
+                              side: const BorderSide(
+                                  color: borderColor, width: 2),
                               borderRadius: BorderRadius.circular(15)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -168,15 +171,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     Text(
                                       "Calories",
                                       style: GoogleFonts.nunito(
-                                          color: textColor,
+                                          color: blackColor,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       "${widget.productModel.calories!} g",
                                       style: GoogleFonts.nunito(
-                                          color: textColor,
-                                          fontSize: 15,
+                                          color: accentColor,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -188,9 +191,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   restartAnimation: false,
                                   animation: true,
                                   fillColor: Colors.transparent,
-                                  progressColor:
-                                      const Color.fromARGB(255, 59, 82, 255),
-                                  backgroundColor: whiteColor,
+                                  // progressColor:
+                                  //     const Color.fromARGB(255, 59, 82, 255),
+                                  progressColor: accentColor,
+                                  backgroundColor: greyColor,
                                   animateFromLastPercent: true,
                                   animationDuration: 1000,
                                   width: size.width * 0.8,
@@ -210,9 +214,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           height: 10,
                         ),
                         Card(
-                          color: Colors.transparent,
+                          color: whiteColor,
+                          elevation: 3,
                           shape: RoundedRectangleBorder(
-                              side: const BorderSide(color: textColor),
+                              side: const BorderSide(
+                                  color: borderColor, width: 2),
                               borderRadius: BorderRadius.circular(15)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -228,15 +234,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     Text(
                                       "Protein",
                                       style: GoogleFonts.nunito(
-                                          color: whiteColor,
+                                          color: blackColor,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       "${widget.productModel.protein!} g",
                                       style: GoogleFonts.nunito(
-                                          color: whiteColor,
-                                          fontSize: 15,
+                                          color: accentColor,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -248,9 +254,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   restartAnimation: false,
                                   animation: true,
                                   fillColor: Colors.transparent,
-                                  progressColor:
-                                      const Color.fromARGB(255, 59, 82, 255),
-                                  backgroundColor: whiteColor,
+                                  // progressColor:
+                                  //     const Color.fromARGB(255, 59, 82, 255),
+                                  progressColor: accentColor,
+                                  backgroundColor: greyColor,
                                   animateFromLastPercent: true,
                                   animationDuration: 1000,
                                   width: size.width * 0.8,
@@ -270,9 +277,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           height: 10,
                         ),
                         Card(
-                          color: Colors.transparent,
+                          color: whiteColor,
+                          elevation: 3,
                           shape: RoundedRectangleBorder(
-                              side: const BorderSide(color: textColor),
+                              side: const BorderSide(
+                                  color: borderColor, width: 2),
                               borderRadius: BorderRadius.circular(15)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -288,15 +297,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     Text(
                                       "Carbohydrate",
                                       style: GoogleFonts.nunito(
-                                          color: whiteColor,
+                                          color: blackColor,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       "${widget.productModel.carbohydrate!} g",
                                       style: GoogleFonts.nunito(
-                                          color: whiteColor,
-                                          fontSize: 15,
+                                          color: accentColor,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -308,9 +317,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   restartAnimation: false,
                                   animation: true,
                                   fillColor: Colors.transparent,
-                                  progressColor:
-                                      const Color.fromARGB(255, 59, 82, 255),
-                                  backgroundColor: whiteColor,
+                                  // progressColor:
+                                  //     const Color.fromARGB(255, 59, 82, 255),
+                                  progressColor: accentColor,
+                                  backgroundColor: greyColor,
                                   animateFromLastPercent: true,
                                   animationDuration: 1000,
                                   width: size.width * 0.8,
@@ -346,7 +356,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             BorderRadius.vertical(top: Radius.circular(20))),
                     child: Container(
                       decoration: const BoxDecoration(
-                          color: bgColor,
+                          color: whiteColor,
                           borderRadius:
                               BorderRadius.vertical(top: Radius.circular(20))),
                       padding: const EdgeInsets.symmetric(
@@ -388,30 +398,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                       errorStyle: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           letterSpacing: 0.5),
-                                      fillColor: bgColor,
+                                      fillColor: whiteColor,
                                       filled: true,
                                       counterText: "",
                                       label: Text("Quality",
                                           style: GoogleFonts.nunito(
-                                              color: textColor)),
+                                              color: blackColor,
+                                              fontWeight: FontWeight.bold)),
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 15, vertical: 15),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(12),
                                         borderSide:
-                                            const BorderSide(color: whiteColor),
+                                            const BorderSide(color: blackColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12),
                                           borderSide: const BorderSide(
-                                              color: whiteColor, width: 2)),
+                                              color: accentColor, width: 2)),
                                       focusedErrorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12),
                                           borderSide: const BorderSide(
-                                              color: Colors.grey)),
+                                              color: blackColor)),
                                       errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -425,7 +436,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 ),
                                 Expanded(
                                   child: TextFormField(
-                                    cursorColor: textColor,
+                                    cursorColor: accentColor,
                                     maxLength: 3,
                                     textAlign: TextAlign.start,
                                     readOnly: true,
@@ -437,30 +448,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                       return null;
                                     },
                                     decoration: InputDecoration(
-                                      fillColor: bgColor,
+                                      fillColor: whiteColor,
                                       filled: true,
                                       counterText: "",
                                       label: Text("Serving type",
                                           style: GoogleFonts.nunito(
-                                              color: textColor)),
+                                              color: blackColor,
+                                              fontWeight: FontWeight.bold)),
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 15, vertical: 15),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(12),
                                         borderSide:
-                                            const BorderSide(color: whiteColor),
+                                            const BorderSide(color: blackColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12),
                                           borderSide: const BorderSide(
-                                              color: whiteColor, width: 2)),
+                                              color: blackColor, width: 2)),
                                       focusedErrorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12),
                                           borderSide: const BorderSide(
-                                              color: Colors.grey)),
+                                              color: blackColor)),
                                       errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -483,13 +495,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     Text(
                                       "Total",
                                       style: GoogleFonts.nunito(
-                                          color: textColor,
+                                          color: accentColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       "${total.toStringAsFixed(2)} g",
                                       style: GoogleFonts.nunito(
-                                          color: textColor,
+                                          color: blackColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],

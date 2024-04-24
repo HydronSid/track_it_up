@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 const String fontFamily = 'Montserrat';
 const String robotoFamily = 'Roboto';
 
-const bgColor = Color(0xFF24293d);
-const accentColor = Color(0xFF8ebbff);
-const textColor = Color(0xFFf4f4fc);
+const bgColor = Color.fromARGB(255, 224, 240, 255);
+const accentColor = Color(0xff0080FE);
+const textColor = Color(0xFF2e2f43);
 const secondaryColor = Color(0xFF2f3855);
 
 const blackColor = Color(0xFF212427);

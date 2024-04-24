@@ -117,7 +117,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 FadeInUp(
                   child: Text(
                     "Welcome to Track it Up",
-                    style: GoogleFonts.nunito(color: textColor, fontSize: 18),
+                    style: GoogleFonts.nunito(
+                        color: blackColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
                   ),
                 ),
                 const SizedBox(
@@ -153,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: LoginTextField(
                           pref: const Icon(
                             CupertinoIcons.person,
-                            color: textColor,
+                            color: accentColor,
                           ),
                           controllerValue: ctlName,
                           hintText: 'Enter your name',
@@ -177,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: LoginTextField(
                                 pref: const Icon(
                                   CupertinoIcons.pin_fill,
-                                  color: textColor,
+                                  color: accentColor,
                                 ),
                                 suf: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -186,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Text(
                                       "Cm",
                                       style: GoogleFonts.nunito(
-                                          color: textColor,
+                                          color: accentColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -210,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: LoginTextField(
                                 pref: const Icon(
                                   CupertinoIcons.pin_fill,
-                                  color: textColor,
+                                  color: accentColor,
                                 ),
                                 suf: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -219,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Text(
                                       "Kg",
                                       style: GoogleFonts.nunito(
-                                          color: textColor,
+                                          color: accentColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -275,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : Text(
                                     "Sign In",
                                     style: GoogleFonts.nunito(
-                                        color: textColor,
+                                        color: whiteColor,
                                         fontWeight: FontWeight.bold),
                                   )),
                       ),

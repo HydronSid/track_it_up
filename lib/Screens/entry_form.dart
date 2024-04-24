@@ -39,7 +39,7 @@ class _EntryFormCalulateState extends State<EntryFormCalulate> {
             Text(
               "Enter what you have eaten so far.",
               style: GoogleFonts.nunito(
-                  color: textColor, fontWeight: FontWeight.bold, fontSize: 22),
+                  color: blackColor, fontWeight: FontWeight.bold, fontSize: 22),
             ),
             const SizedBox(
               height: 15,
@@ -159,7 +159,7 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-      color: bgColor,
+      color: whiteColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: const BorderSide(color: textColor)),
@@ -184,27 +184,31 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                           children: [
                             Text(
                               widget.title,
-                              style: GoogleFonts.nunito(color: textColor),
+                              style: GoogleFonts.nunito(
+                                  color: accentColor,
+                                  fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             Text(
                               "${widget.totalCal} Cal eaten",
-                              style: GoogleFonts.nunito(color: textColor),
+                              style: GoogleFonts.nunito(
+                                  color: blackColor,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
                         const Spacer(),
                         const Icon(
                           Icons.add,
-                          color: whiteColor,
+                          color: accentColor,
                         )
                       ],
                     ),
                   ),
                   const Divider(
-                    color: whiteColor,
+                    color: blackColor,
                   ),
                   widget.state == ConnectionState.waiting
                       ? Container(
@@ -212,7 +216,7 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                           width: 15,
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           child: const CircularProgressIndicator(
-                            color: textColor,
+                            color: accentColor,
                           ),
                         )
                       : ListView.separated(
@@ -238,8 +242,9 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                                   children: [
                                     Text(
                                       product.name!,
-                                      style:
-                                          GoogleFonts.nunito(color: textColor),
+                                      style: GoogleFonts.nunito(
+                                          color: blackColor,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(
                                       height: 5,
@@ -247,14 +252,16 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                                     Text(
                                       "${divideVal.toStringAsFixed(2)} Cal x ${product.quantity!}",
                                       style:
-                                          GoogleFonts.nunito(color: textColor),
+                                          GoogleFonts.nunito(color: blackColor),
                                     ),
                                   ],
                                 ),
                                 const Spacer(),
                                 Text(
                                   "${product.totalCalories!} Cal",
-                                  style: GoogleFonts.nunito(color: textColor),
+                                  style: GoogleFonts.nunito(
+                                      color: accentColor,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -270,7 +277,7 @@ class _EntryFormOneHelperState extends State<EntryFormOneHelper> {
                                   },
                                   child: const Icon(
                                     Icons.close,
-                                    color: whiteColor,
+                                    color: accentColor,
                                   ),
                                 )
                               ],

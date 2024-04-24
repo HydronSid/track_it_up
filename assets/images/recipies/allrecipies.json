@@ -4,29 +4,32 @@
         "name":"Butter chicken",
         "image":"butter_chicken.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "100 gram chicken",
+            "Onion-tomato paste",
+            "Butter chicken masal",
+            "Butter",
+            "Spices"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "12.45",
+            "197",
+            "12.83"
         ]    
     },
     {
         "recipeId":"1",
-        "name":"Paneer butter masal",
+        "name":"Paneer butter masala",
         "image":"paneer_butter_masal.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "70 gram paneer",
+            "Onion-tomato paste",
+            "Gravy spices",
+            "Butter"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "7.4",
+            "168",
+            "10.5"
         ]    
     },
     {
@@ -34,14 +37,17 @@
         "name":"Avocado toast",
         "image":"avocado_toast.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "2 slice bread",
+            "1 avocado mashed",
+            "Butter",
+            "Salt",
+            "Pepper",
+            "Onion tomato"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "5.45",
+            "334",
+            "20.12"
         ]    
     },
     {
@@ -49,14 +55,17 @@
         "name":"Paneer pulao",
         "image":"paneer_pulao.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "150 gram rice",
+            "50 gram paneer",
+            "Onion",
+            "Tomato",
+            "Biryani masala",
+            "Spices"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "13.59",
+            "247",
+            "37.27"
         ]    
     },
     {
@@ -64,14 +73,17 @@
         "name":"Mutton biryani",
         "image":"mutton_biryani.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "150 gram rice",
+            "50 gram mutton",
+            "Onion",
+            "Tomato",
+            "Biryani masala",
+            "Spices"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "15.45",
+            "441",
+            "48.67"
         ]    
     },
     {
@@ -79,14 +91,17 @@
         "name":"Chicken biryani",
         "image":"chicken_biryani.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "150 gram rice",
+            "50 gram chicken",
+            "Onion",
+            "Tomato",
+            "Biryani masala",
+            "Spices"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "20.56",
+            "405",
+            "38.23"
         ]    
     },
     {
@@ -94,14 +109,15 @@
         "name":"Chicken fried rice",
         "image":"chicken_fried_rice.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "120gm rice",
+            "40 gram chicken",
+            "Veggies of choice",
+            "Sauce of choice"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "20",
+            "450",
+            "50"
         ]    
     },
     {
@@ -109,14 +125,14 @@
         "name":"Veg fried rice",
         "image":"veg_fried_rice.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "120 gram rice",
+            "Veggies of choice",
+            "Sauce of choice"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "12",
+            "370",
+            "39"
         ]    
     },
     {
@@ -124,14 +140,15 @@
         "name":"Egg bhurji",
         "image":"egg_bhurji.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "2 eggs",
+            "Onion",
+            "Tomato",
+            "Spices"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "9",
+            "152",
+            "2.4"
         ]    
     },
     {
@@ -139,14 +156,16 @@
         "name":"Paneer bhurji",
         "image":"paneer_bhurji.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "60 grams paneer",
+            "Onion",
+            "Tomato",
+            "Coriander",
+            "Spices"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "8",
+            "74",
+            "4"
         ]    
     },
     {
@@ -154,14 +173,18 @@
         "name":"Vegetable sandwich",
         "image":"vegetable_sandwich.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "4 slice bread",
+            "Onion",
+            "Tomato",
+            "Boiled potato",
+            "Cucumber",
+            "Butter",
+            "Chutney"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "9.4",
+            "278",
+            "49.34"
         ]    
     },
     {
@@ -169,14 +192,17 @@
         "name":"Chicken mayo sandwich",
         "image":"chicken_mayo_sandwich.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "50 grams boiled chicken",
+            "Mayonnaise",
+            "Salt",
+            "Pepper",
+            "Coriander",
+            "4 slice bread"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "27.65",
+            "342",
+            "37.67"
         ]    
     },
     {
@@ -184,14 +210,12 @@
         "name":"Dosa",
         "image":"dosa.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "1 piece"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "3.5",
+            "92",
+            "11.3"
         ]    
     },
     {
@@ -199,14 +223,12 @@
         "name":"Idli",
         "image":"idli.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "4 piece"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "6.07",
+            "138",
+            "28"
         ]    
     },
     {
@@ -214,14 +236,16 @@
         "name":"Omelet sandwich",
         "image":"omelet_sandwich.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "2 eggs omelette",
+            "Coriander",
+            "Green chillies",
+            "4 slice bread",
+            "Butter"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "12.3",
+            "168",
+            "2"
         ]    
     },
     {
@@ -229,14 +253,16 @@
         "name":"Egg sandwich",
         "image":"egg_sandwich.jpg",
         "ingredients": [
-            "ingredientsOne",
-            "ingredientsTwo",
-            "ingredientsThree"
+            "2 boiled egg",
+            "Mayonnaise",
+            "Salt",
+            "Pepper",
+            "4 slice bread"
         ],
         "description": [
-            "DescriptionOne",
-            "DescriptionTwo",
-            "DescriptionThree"
+            "14",
+            "354",
+            "26.5"
         ]    
     }
 
